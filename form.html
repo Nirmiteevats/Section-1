@@ -3,30 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adission Form</title>
+    <title>Adission Form</title><style>
+    body{
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        background: linear-gradient(to right, #74ebd5, #ACB6E5);
+        padding: 20px;
+    }
+    form{
+        width: 450px;
+        margin: auto;
+        background: rgb(178, 189, 226);
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    h1{
+        text-align: center;
+        color: #333;
+    }
+    label{
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    textarea,
+    select{
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        /* important */
+        box-sizing: border-box;
+        font-size: 15px;
+    }
+    button{
+        width: 100%;
+        padding: 12px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
 </head>
 <body>
-    
     <h1>Student Admission Form</h1>
-    
     <form action="">
-    <label for="">Student<br> Name</label>
+    <label for="">Student Name</label>
     <input type="text" required minlength="2">
     <br>
     <br>
 
     <label for="">Student Email</label>
-    <input type="email">
+    <input type="email" required>
     <br>
     <br>
 
     <label for="">Date of birth</label>
-    <input type="date">
+    <input type="date" required>
     <br>
     <br>
 
     <label for="">Address</label>
-    <textarea cols="20" rows="4"></textarea>
+    <textarea cols="20" rows="4" required></textarea>
     <br>
     <br>
 
@@ -36,8 +81,8 @@
     <br>
     <br> 
 
-    <label for=""></label>
-    <select>
+    <label for="">Select course</label>
+    <select required>
         <option>MERN Stack Development</option>
         <option>Data Science</option>
         <option>Data Analytics</option>
@@ -48,7 +93,7 @@
     <br><br>
 
     <label for="">Select College</label>
-    <input type="text" list="college">
+    <input type="text" list="college" required>
     <datalist id="college">
         <option>Study Hall</option>
         <option>SRMCEM</option>
@@ -59,7 +104,7 @@
  
     <br><br>
 
-    <input type="checkbox" id="terms">
+    <input type="checkbox" id="terms" required>
     <label for="terms">Accept terms & conditions</label>
     <br><br>
 
@@ -67,7 +112,7 @@
         <summary>View Terms & Conditions</summary>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eos illo animi molestiae beatae quod, tempore, similique dolores aspernatur a atque ex voluptates consectetur culpa quae, labore odit consequatur asperiores!</p>
     </details>
-
+    <br>
     <button type="submit">Submit</button>
     </form>
 
