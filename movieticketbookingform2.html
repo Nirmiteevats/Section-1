@@ -19,25 +19,59 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-        label{
+
+        label {
+            display: block;
             color: white;
             font-size: larger;
         }
 
-        h1{
-            text-align: center;
-            font-family:'Times New Roman', Times, serif
+        input {
+            display: block;
+            width: 95%;
+            height: 20px;
         }
 
-        .container{
+        select {
+            display: block;
+            width: 365px;
+            height: 30px;
+        }
+        .checkbox-group{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .checkbox-group input[type="checkbox"]{
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+
+        .checkbox-group label{
+            display: inline;
+            margin: 0;
+            color:black;
+            font-size:medium;
+        }
+
+        
+
+        h1 {
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif
+        }
+
+        .container {
             background-color: rgb(218, 17, 17);
             width: 20%;
-            height: 40%;
+            height: 59%;
             border-radius: 20px;
             padding: 30px;
 
         }
-        button{
+
+        button {
             display: block;
             height: 30px;
             width: 130px;
@@ -54,19 +88,9 @@
         <h1>Movie Ticket Booking</h1>
         <form action="">
             <div>
-                <label for="">Full Name</label>
-                <input type="text" placeholder="Enter your full name" required>
-            </div>
-            <br>
-            <div>
-                <label for="">Email</label>
-                <input type="email" placeholder="Enter your email" required>
-            </div>
-            <br>
-            <div>
                 <label for="">Select Movie</label>
                 <select required>
-                    <option value="">Choose Movie</option>
+                    <option value="" disabled selected>--Choose a Movie--</option>
                     <option>Masters of the Universe</option>
                     <option>In the Grey</option>
                     <option>Crime 101</option>
@@ -75,13 +99,14 @@
             </div>
             <br>
             <div>
-                <label for="">Date</label>
+                <label for="">Select Date</label>
                 <input type="date">
             </div>
             <br>
             <div>
-                <label for="">Time</label>
+                <label for="">Showtime</label>
                 <select required>
+                    <option disabled selected>--Select Time--</option>
                     <option>10:00AM</option>
                     <option>01:00PM</option>
                     <option>02:35PM</option>
@@ -95,8 +120,21 @@
                 <label for="">Number of Tickets</label>
                 <input type="number" min="1" max="10" value="1">
             </div>
-
             <br>
+            <div>
+                <label for="">Full Name</label>
+                <input type="text" placeholder="Enter your full name" required>
+            </div>
+            <br>
+            <div>
+                <label for="">Email Address</label>
+                <input type="email" placeholder="Enter your email" required>
+            </div>
+            <br>
+            <div class="checkbox-group">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the cancellation and refund policy.</label>
+            </div>
             <button type="submit">Book Now</button>
         </form>
     </div>
