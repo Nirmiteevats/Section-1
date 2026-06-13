@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Booking Form</title>
+    <style>
+        body {
+            display: flex;
+            /* for horizontal center alignment use justify-content: center; */
+            justify-content: center;
+            /* for vertical center alignment use 
+            align-items: center;*/
+            align-items: center;
+            height: 100vh;
+            background-color: #b12222;
+            background-image: url("movieimg1.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        label{
+            color: white;
+            font-size: larger;
+        }
+
+        h1{
+            text-align: center;
+            font-family:'Times New Roman', Times, serif
+        }
+
+        .container{
+            background-color: rgb(218, 17, 17);
+            width: 20%;
+            height: 40%;
+            border-radius: 20px;
+            padding: 30px;
+
+        }
+        button{
+            display: block;
+            height: 30px;
+            width: 130px;
+            margin: 20px auto;
+            background-color: black;
+            color: wheat;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Movie Ticket Booking</h1>
+        <form action="">
+            <div>
+                <label for="">Full Name</label>
+                <input type="text" placeholder="Enter your full name" required>
+            </div>
+            <br>
+            <div>
+                <label for="">Email</label>
+                <input type="email" placeholder="Enter your email" required>
+            </div>
+            <br>
+            <div>
+                <label for="">Select Movie</label>
+                <select required>
+                    <option value="">Choose Movie</option>
+                    <option>Masters of the Universe</option>
+                    <option>In the Grey</option>
+                    <option>Crime 101</option>
+                    <option>Outcome</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="">Date</label>
+                <input type="date">
+            </div>
+            <br>
+            <div>
+                <label for="">Time</label>
+                <select required>
+                    <option>10:00AM</option>
+                    <option>01:00PM</option>
+                    <option>02:35PM</option>
+                    <option>05:25PM</option>
+                    <option>08:00PM</option>
+                    <option>10:45PM</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="">Number of Tickets</label>
+                <input type="number" min="1" max="10">
+            </div>
+
+            <br>
+            <button type="submit">Book Now</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
