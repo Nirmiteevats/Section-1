@@ -1,34 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
+        rel="stylesheet" />
+
     <style>
-        .card{
+        * {
+            font-family: roboto;
+        }
+
+        .card {
             border: 2px solid red;
             width: 20%;
             background-color: white;
             border-radius: 10px;
             padding: 20px;
+            /* x-offset y-offset blur size color */
+            box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.397);
 
         }
 
-        body{
+        body {
             display: flex;
             /* for horizontal center alignment use justify-content: center; */
             justify-content: center;
+            /* for horizontal center alignment use   */
+
             align-items: center;
 
             height: 100vh;
-            background-color: gray;
+            background-color: lightgray;
 
         }
 
+        .form-title {
 
+            text-align: center;
+            font-size: 30px;
+        }
 
+        .text-input {
+            display: block;
+            width: 100%;
+            /* padding-top: 10px; */
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+            margin-top: 5px;
+            border: none;
+            border: 1px solid black;
+        }
 
+        .btn-submit {
+            background-color: blueviolet;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .link {
+            text-decoration: none;
+            color: blueviolet;
+            display: block;
+            margin: 10px 0;
+        }
+        .forget-link{
+            text-align: right;
+        }
+        .signup-link{
+            text-align: center;
+        }
     </style>
 
 
@@ -47,10 +97,15 @@
             <label for="">Password</label>
             <input class="text-input" type="password">
 
+            <a href="#" class="link forget-link">Forgot password</a>
+
             <button class="btn-submit">Submit</button>
+
+            <a href="#" class="link signup-link">Not Registered Yet? Signup Now</a>
         </form>
     </div>
 
 
 </body>
+
 </html>
