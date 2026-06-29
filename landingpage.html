@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
@@ -83,7 +84,9 @@
                         <h3 class="text-2xl font-semibold">Card Title 1</h3>
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla tempore, distinctio facere
                             ipsam aut nisi deleniti esse architecto beatae hic!</p>
-                        <button class="bg-linear-to-br from-violet-400 to-pink-400 p-3 text-white w-full rounded-lg">View Details</button>
+                        <button
+                            class="bg-linear-to-br from-violet-400 to-pink-400 p-3 text-white w-full rounded-lg">View
+                            Details</button>
                     </div>
                     <div class="bg-white p-8 space-y-4 rounded-xl shadow-lg text-center hover:scale-110 duration-300">
 
@@ -92,7 +95,9 @@
                         <h3 class="text-2xl font-semibold">Card Title 2</h3>
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla tempore, distinctio facere
                             ipsam aut nisi deleniti esse architecto beatae hic!</p>
-                        <button class="bg-linear-to-br from-violet-400 to-pink-400 p-3 text-white w-full rounded-lg">View Details</button>
+                        <button
+                            class="bg-linear-to-br from-violet-400 to-pink-400 p-3 text-white w-full rounded-lg">View
+                            Details</button>
                     </div>
                     <div class="bg-white p-8 space-y-4 rounded-xl shadow-lg text-center hover:scale-110 duration-300">
 
@@ -101,7 +106,9 @@
                         <h3 class="text-2xl font-semibold">Card Title 3</h3>
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla tempore, distinctio facere
                             ipsam aut nisi deleniti esse architecto beatae hic!</p>
-                        <button class="bg-linear-to-br from-violet-400 to-pink-400 p-3 text-white w-full rounded-lg">View Details</button>
+                        <button
+                            class="bg-linear-to-br from-violet-400 to-pink-400 p-3 text-white w-full rounded-lg">View
+                            Details</button>
                     </div>
                 </div>
             </section>
@@ -128,14 +135,88 @@
                     </div>
 
                     <div>
-                        <h1 class="text-6xl">Benefits From Our Online Learning</h1>
+                        <h1 class="text-6xl font-semibold mb-8"><span class="text-purple-500">Benefits</span> From Our Online Learning
+                        </h1>
                         <div>
+                            <!-- Item 1 -->
+                            <div class="flex gap-5 mb-8">
+                                <div
+                                    class="w-16 h-16 rounded-full bg-purple-500 text-white flex items-center justify-center text-2xl">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-2xl font-semibold mb-2">
+                                        Online Degrees
+                                    </h3>
+
+                                    <p class="text-gray-500">
+                                        Earn accredited degrees from the comfort of your
+                                        home, opening doors to a world of possibilities.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="flex gap-5 mb-8">
+                                <div
+                                    class="w-16 h-16 rounded-full bg-pink-400 text-white flex items-center justify-center text-2xl">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-2xl font-semibold mb-2">
+                                        Short Courses
+                                    </h3>
+
+                                    <p class="text-gray-500">
+                                        Enhance your skills with concise and focused courses,
+                                        designed for quick and effective learning.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="flex gap-5 mb-8">
+                                <div
+                                    class="w-16 h-16 rounded-full bg-purple-500 text-white flex items-center justify-center text-2xl">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-2xl font-semibold mb-2">
+                                        Training From Experts
+                                    </h3>
+
+                                    <p class="text-gray-500">
+                                        Learn from industry experts through practical,
+                                        hands-on experience.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Item 4 -->
+                            <div class="flex gap-5">
+                                <div
+                                    class="w-16 h-16 rounded-full bg-pink-400 text-white flex items-center justify-center text-2xl">
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-2xl font-semibold mb-2">
+                                        1.5k+ Video Courses
+                                    </h3>
+
+                                    <p class="text-gray-500">
+                                        Access thousands of video courses covering a wide
+                                        range of subjects with engaging visual lessons.
+                                    </p>
+                                </div>
+                            </div>
 
                         </div>
+
                     </div>
-
-                </div>
-
             </section>
 
         </article>
@@ -143,11 +224,72 @@
     </main>
 
 
-    <footer>
+    <footer class="bg-linear-to-br from-violet-400 to-pink-400 py-16 text-white">
+
+        <div class="px-6 md:px-0 container mx-auto">
+            <div class="grid md:grid-cols-12 gap-8">
+                <div class="col-span-4 space-y-4">
+                    <h3 class="text-3xl font-semibold">Brand Name</h3>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere atque dignissimos libero veritatis! Dicta provident aspernatur temporibus asperiores minima officia.</p>
+                    <div class="flex gap-3">
+                        <span class="bg-white text-pink-500 p-1.5 size-8 rounded-full">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </span>
+                        <span class="bg-white text-pink-500 p-1.5 size-8 rounded-full">
+                            <i class="fa-brands fa-instagram"></i>
+                        </span>
+                        <span class="bg-white text-pink-500 p-1.5 size-8 rounded-full">
+                            <i class="fa-brands fa-x"></i>
+                        </span>
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-span-2">
+                    <h4 class="text-2xl font-semibold">Important Links</h4>
+                    <div class="mt-6 flex flex-col gap-3">
+                        <a href="#">Home</a>
+                        <a href="#">About Us</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <h4 class="text-2xl font-semibold">Important Links</h4>
+                    <div class="mt-6 flex flex-col gap-3">
+                        <a href="#">Home</a>
+                        <a href="#">About Us</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>                
+                <div class="col-span-2">
+                    <h4 class="text-2xl font-semibold">Important Links</h4>
+                    <div class="mt-6 flex flex-col gap-3">
+                        <a href="#">Home</a>
+                        <a href="#">About Us</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>                
+                <div class="col-span-2">
+                    <h4 class="text-2xl font-semibold">Important Links</h4>
+                    <div class="mt-6 flex flex-col gap-3">
+                        <a href="#">Home</a>
+                        <a href="#">About Us</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>                
+
+            </div>
+
+        </div>
 
     </footer>
-
-
 
 </body>
 
