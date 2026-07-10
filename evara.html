@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Evara | Luxury Event Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#12121d",
+                    "tertiary-fixed-dim": "#c6c4df",
+                    "surface-dim": "#12121d",
+                    "on-tertiary-fixed": "#1a1a2e",
+                    "surface-container-high": "#292935",
+                    "on-secondary": "#2f3036",
+                    "on-secondary-fixed": "#1a1b21",
+                    "inverse-on-surface": "#302f3b",
+                    "tertiary-container": "#2f2f44",
+                    "on-primary-fixed": "#2c0050",
+                    "on-primary-container": "#ba7ef4",
+                    "on-primary-fixed-variant": "#622599",
+                    "on-tertiary": "#2f2e43",
+                    "on-surface-variant": "#cec3d3",
+                    "inverse-surface": "#e3e0f1",
+                    "primary": "#ddb7ff",
+                    "secondary-container": "#45464d",
+                    "on-secondary-container": "#b4b4bc",
+                    "surface-bright": "#383845",
+                    "tertiary": "#c6c4df",
+                    "on-surface": "#e3e0f1",
+                    "on-primary": "#4a0080",
+                    "secondary-fixed": "#e2e2ea",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#45464d",
+                    "primary-container": "#4b0082",
+                    "surface-container-lowest": "#0d0d18",
+                    "primary-fixed-dim": "#ddb7ff",
+                    "secondary-fixed-dim": "#c6c6ce",
+                    "inverse-primary": "#7b41b3",
+                    "on-tertiary-container": "#9897b0",
+                    "on-background": "#e3e0f1",
+                    "error": "#ffb4ab",
+                    "surface-tint": "#ddb7ff",
+                    "tertiary-fixed": "#e2e0fc",
+                    "surface-variant": "#343440",
+                    "outline-variant": "#4c4451",
+                    "outline": "#978d9d",
+                    "surface-container": "#1f1e2a",
+                    "secondary": "#c6c6ce",
+                    "on-tertiary-fixed-variant": "#45455b",
+                    "background": "#12121d",
+                    "primary-fixed": "#f0dbff",
+                    "surface-container-highest": "#343440",
+                    "surface-container-low": "#1b1a26"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-mobile": "20px",
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "container-max": "1200px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Playfair Display"],
+                    "label-caps": ["Manrope"],
+                    "display-lg": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "headline-sm": ["Playfair Display"],
+                    "body-lg": ["Manrope"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0F0F1A;
+            color: #e3e0f1;
+            overflow-x: hidden;
+        }
+        .glass-surface {
+            background: rgba(192, 192, 200, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(192, 192, 200, 0.15);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        .glass-floating {
+            background: rgba(192, 192, 200, 0.18);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(192, 192, 200, 0.15);
+        }
+        .timeline-node {
+            position: relative;
+        }
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: -32px;
+            width: 1px;
+            background: rgba(192, 192, 200, 0.2);
+            z-index: 0;
+        }
+        .timeline-node:last-child::before {
+            display: none;
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(221, 183, 255, 0.3);
+        }
+        .input-glow:focus {
+            outline: none;
+            border-bottom-color: #ddb7ff;
+            box-shadow: 0 4px 12px -2px rgba(221, 183, 255, 0.2);
+        }
+        .masonry {
+            columns: 1;
+        }
+        @media (min-width: 768px) { .masonry { columns: 2; } }
+        @media (min-width: 1024px) { .masonry { columns: 3; } }
+    </style>
+</head>
+<body class="selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-secondary/10 shadow-sm">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<div class="font-display-lg text-headline-sm tracking-tighter text-on-surface">Evara</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#events">Events</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#services">Services</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#gallery">Gallery</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#testimonials">Testimonials</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#contact">Contact</a>
+</nav>
+<button class="bg-primary text-on-primary px-6 py-2 font-label-caps text-label-caps rounded-sm hover:opacity-80 transition-all">
+                Inquire Now
+            </button>
+</div>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center justify-center overflow-hidden px-gutter">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center brightness-50 scale-105" data-alt="A cinematic, high-angle shot of a lavish luxury event ballroom in London at night. The room is filled with warm, golden candlelight from ornate chandeliers and candelabras. Guests in sophisticated black-tie attire are seen in soft-focus background, while a foreground arrangement of deep crimson roses and silver accents captures the quiet luxury and exclusivity of the Evara brand. The overall mood is moody, prestigious, and masterfully organized." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6Zbm3HPn2WUkFTTu7VSYoZf14zgE-7D5RUyyTFxYTQTl0EqcGs3YL_TAdmCMVDe3R6OSqXr0O8nIejjgCqGbemzMEC_GX9ZyzDjTjLNkQXjDtxPmTs-RBHLSJFNFxi12QaXBQp1hRzq0lFaJf9L7GUA3RkRRJ4OqIj42TvI3fnThC7s8-rJdxRR8OB33EtxwIs4LNclZXboeWYuNEP-gR7NVQotk2MQYz9A3hDMYt2aXxDtAF1fvDF_0l9G-_6Aw122lGQesNHg')"></div>
+</div>
+<div class="relative z-10 text-center max-w-4xl mx-auto space-y-8">
+<div class="inline-block px-4 py-1 glass-surface rounded-full">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">The Pinnacle of Prestige</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface leading-tight">Crafting Moments of <br/><span class="italic text-primary-fixed-dim">Unrivaled Elegance</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">From intimate soirées to grand galas, Evara transforms your vision into a meticulously orchestrated masterpiece of luxury and style.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+<button class="bg-secondary-fixed text-on-secondary-fixed px-10 py-4 font-label-caps text-label-caps rounded-sm hover:scale-105 transition-transform">Explore Portfolio</button>
+<button class="glass-surface text-on-surface border border-secondary/20 px-10 py-4 font-label-caps text-label-caps rounded-sm hover:bg-white/5 transition-colors">Our Approach</button>
+</div>
+</div>
+</section>
+<!-- Types of Event (Bento Style) -->
+<section class="py-32 px-gutter max-w-container-max mx-auto" id="events">
+<div class="mb-16">
+<h2 class="font-display-lg text-headline-md text-on-surface mb-2">Our Specialties</h2>
+<div class="w-24 h-1 bg-primary"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Weddings -->
+<div class="md:col-span-2 group relative overflow-hidden h-[400px] rounded-lg glass-surface">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700 opacity-60" data-alt="Close-up detail of a bespoke luxury wedding reception table. A platinum silver charger plate sits beneath fine bone china, flanked by crystal glassware reflecting the glow of purple-tinted ambient lighting. A minimalist floral arrangement of white orchids and silver leaves creates a sophisticated, modern aesthetic. The atmosphere is serene and impeccably refined, representing Evara's quiet luxury branding." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDlsHtJIi9yIx8nsPC7sWHJSfDeWLFSzUPVNZAfUtOE3mXILGBoG2xysn8RXCDpUCNArVVgmL0fyz9gxnIBNkPgsT4e2yLJQFm59Rryte6ruo-935SZYv9PZWMP2-zQmKFl-cPUFmZI0UWEQl7tA-92cNOQ1dbnmvQ_es13QhViDTVZfPWoUwxp023RIWKxCsWb29K9pUCOi8F0SBzUko5ZjRwbx_VN_VehH4VBmwgGtF6IsNcjqZfr_BHnfIY0Fr4kLuzd7BoKaw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+<div class="absolute bottom-0 p-8">
+<span class="material-symbols-outlined text-primary mb-4 text-4xl" data-icon="favorite" data-weight="fill">favorite</span>
+<h3 class="font-display-lg text-headline-sm text-on-surface mb-2">Bespoke Weddings</h3>
+<p class="font-body-md text-on-surface-variant max-w-md">Ethereal celebrations tailored to the unique narrative of your love, executed with architectural precision.</p>
+</div>
+</div>
+<!-- Corporate -->
+<div class="group relative overflow-hidden h-[400px] rounded-lg glass-surface">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700 opacity-60" data-alt="A sleek, modern corporate gala in a high-rise venue with floor-to-ceiling windows overlooking a city skyline at dusk. Deep purple neon accents illuminate minimalist lounge areas. The lighting is low and sophisticated, emphasizing clean lines and high-end materials like dark wood and brushed silver. Professionals in elegant attire converse in a space that feels exclusive, powerful, and impeccably organized." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCaKZoFMHe_S4Vh5X5K6efpapHcb5ItbQ3hove2NvkM8nUcXJS0cg-fbY6ri_fJMXi1KN66LbibtCslq1KQ_0ZT9fj9zOs27iX3_7MxjA2APmjBBDSzEhkh1eExXC9RHmDtwhqbX8CTXT_FX6c97opBO67snn3mcCQ3sF89G5uN8PEeRpRNptoPuzaxY9CugW3RNkF8t-DYpYaNaTTQUrBthIMgKfyrLufguH3xgd4Ruvo0zllLQX4px4N9QpO1v3i42GbLDIAsfw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+<div class="absolute bottom-0 p-8">
+<span class="material-symbols-outlined text-primary mb-4 text-4xl" data-icon="business_center" data-weight="fill">business_center</span>
+<h3 class="font-display-lg text-headline-sm text-on-surface mb-2">Corporate Galas</h3>
+<p class="font-body-md text-on-surface-variant">Elevating brand identity through immersive experiences that resonate with high-net-worth stakeholders.</p>
+</div>
+</div>
+<!-- Private Parties -->
+<div class="md:col-span-3 group relative overflow-hidden h-[300px] rounded-lg glass-surface">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-1000 opacity-40" data-alt="An intimate rooftop dinner party under a canopy of warm fairy lights and a clear night sky. The long table is set with dark navy linens and silver cutlery, with small glowing purple nodes acting as futuristic centerpieces. The setting is a private terrace in a Mediterranean coastal town, with soft shadows and a sense of exclusive, high-society relaxation. The visual style is premium and minimalist." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB51LofnrzKrGEjsQ412vwnUQ9AsLJFlq_G_wk7y_VGYxQLQhOhWDrfPnpk07cLbCYvkjW02aKXog6ElOqGU6WXBXsUWnJXAUFvszz4Xc5ji_lFdj9UkWO__THuG_ylMP7LDXMZkWPa6xHZLibqrz26zsfy2UImkkVeXo-SagVifeSAz8ySZbfI6hVf388OZRadsyCE0l9FK7WgJLuJY6DrWUgwtTZsuLhKCaTZQ0j_scqeWX79zMfIjc7C4f84aRw23owH-hDN4w')"></div>
+<div class="flex items-center justify-between h-full px-8 relative z-10">
+<div class="max-w-xl">
+<h3 class="font-display-lg text-headline-sm text-on-surface mb-2">Private Soirées</h3>
+<p class="font-body-md text-on-surface-variant">Exclusive gatherings for the discerning individual, where every detail is a conversation piece.</p>
+</div>
+<span class="material-symbols-outlined text-primary text-6xl opacity-20 hidden md:block" data-icon="celebration">celebration</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section (Glass Cards) -->
+<section class="py-32 bg-surface-container-lowest" id="services">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center mb-20">
+<h2 class="font-display-lg text-display-lg-mobile md:text-headline-md text-on-surface">Comprehensive Curated Services</h2>
+<p class="font-body-md text-on-surface-variant mt-4">We handle the complexities so you can inhabit the moment.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Service 1 -->
+<div class="glass-floating p-10 rounded-lg hover:-translate-y-2 transition-transform duration-500">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary" data-icon="architecture">architecture</span>
+</div>
+<h3 class="font-display-lg text-headline-sm text-on-surface mb-4">Architectural Design</h3>
+<p class="font-body-md text-on-surface-variant leading-relaxed">Conceptualizing spaces through a lens of high art and structural elegance. We design atmospheres that breathe.</p>
+<div class="mt-8 pt-8 border-t border-secondary/10">
+<ul class="space-y-3 font-body-md text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> 3D Spatial Previz</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Lighting Choreography</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Acoustic Design</li>
+</ul>
+</div>
+</div>
+<!-- Service 2 -->
+<div class="glass-floating p-10 rounded-lg hover:-translate-y-2 transition-transform duration-500">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary" data-icon="event_seat">event_seat</span>
+</div>
+<h3 class="font-display-lg text-headline-sm text-on-surface mb-4">Master Planning</h3>
+<p class="font-body-md text-on-surface-variant leading-relaxed">Precision logistics that ensure a seamless flow from the first invitation to the final departure.</p>
+<div class="mt-8 pt-8 border-t border-secondary/10">
+<ul class="space-y-3 font-body-md text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Vendor Diplomacy</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Dynamic Timeline Mgmt</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Global Sourcing</li>
+</ul>
+</div>
+</div>
+<!-- Service 3 -->
+<div class="glass-floating p-10 rounded-lg hover:-translate-y-2 transition-transform duration-500">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary" data-icon="restaurant">restaurant</span>
+</div>
+<h3 class="font-display-lg text-headline-sm text-on-surface mb-4">Bespoke Concierge</h3>
+<p class="font-body-md text-on-surface-variant leading-relaxed">Curating the sensory experience, from Michelin-starred menus to world-class entertainment.</p>
+<div class="mt-8 pt-8 border-t border-secondary/10">
+<ul class="space-y-3 font-body-md text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Gastronomic Curating</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Talent Acquisition</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Guest Experience Suite</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gallery Section (Masonry) -->
+<section class="py-32 px-gutter max-w-container-max mx-auto" id="gallery">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="max-w-xl">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase mb-4 block">Visual Chronicles</span>
+<h2 class="font-display-lg text-headline-md text-on-surface">The Portfolio of Evara</h2>
+</div>
+<button class="font-label-caps text-label-caps text-primary border-b border-primary/30 pb-1 hover:border-primary transition-all">View All Collections</button>
+</div>
+<div class="masonry gap-6 space-y-6">
+<div class="break-inside-avoid rounded-lg overflow-hidden glass-surface">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="A wide cinematic shot of a luxury garden wedding at twilight. Long banquet tables are dressed in charcoal gray linens with silver metallic chairs. Hundreds of glass globes with flickering candles hang from a massive, centuries-old oak tree. The lighting is a mix of warm amber and cool deep purple, creating a magical, dreamlike atmosphere in a high-end estate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNohnidLkZ107g0KmzXCFgeMMXxbdtsA1mYGEn1HbbrxqO66alWGdvSYLGKIEBelQIsE99juMyrxt2N5edrzTIVuhkCERlV5-Jll2lA4pKeIx0uggSDb6ckfmi5YNChLiKxqooUkMjc-f6I8FcEJuuUB_gopm_lJ5SFme_UMk8dZDZUcLsXCUUuxLDfivN56Q4DcTiLEq6X_ISoujXA0rXQedtRcw5knn578CFXa1vyzxF7Pwe3hiIUEXapiOwclXPI_8iZBk0lw"/>
+</div>
+<div class="break-inside-avoid rounded-lg overflow-hidden glass-surface">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Close up of a luxury event floral installation. Exotic dark purple calla lilies and deep red peonies are arranged in a massive, silver sculptural vase. The lighting highlights the textures of the petals and the brushed metal of the vase. The background is a softly blurred obsidian black, emphasizing the rich, sophisticated color palette of the Evara brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkt_0VXDHuOpEWo7LzkK7Bg9qhCQFZDJK2ate3SinQmxydAHpd0A1hUmuGwW5e4TUPnS_IkgGY-yUYCmMrCT58f1aXZygZ9FmTcMCkqmjjyartB3jTPKBC6oPZZALOJ7Xq2BR4KrAXNMJ5La3uXU4ZJ2PtxzpTAvQvpW__Iq5LjbVC8GvnVOB9vk2s7Pso8kDzXYrG2C6iwm08_GnF8lptjlpmqDhi4Xjb9U7xHuEoWe2lVRrfbQqB7jFRV1ElDtkYmKa69XOe_A"/>
+</div>
+<div class="break-inside-avoid rounded-lg overflow-hidden glass-surface">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Interior of a modern luxury ballroom with high-gloss black floors reflecting a series of glowing purple arches. The architecture is minimalist with sharp silver edges. Guests in elegant formal wear are captured in silhouette against the vibrant, artistic lighting installations. The vibe is ultra-modern, prestigious, and avant-garde event design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0h7ZfW4xGUnJO4VYMHWQNo2IQdVMsCmgMNa3CFc31F9szQdUNH7DNNyhXNO1K65DxDknH70-KU7xS6fx96kJLkpXSLzkXTBRoqQ8h8HWMKbPpwPRUHkEXRiCr7obq4PepIwYNq8QFdTdQ9cIHYYj9MwxKSgUB3QQnQvMjdiC1QVkelMVlFLZhc6upTxDDQSgo7bm_GqgPeqUY4QbIqce_m0yMFWK0TwjMtvIIn4P0jKi0nYaYF_QXXin1_kRhASuMEJ-dW9Ayng"/>
+</div>
+<div class="break-inside-avoid rounded-lg overflow-hidden glass-surface">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="A bespoke champagne tower at a high-society engagement party. The glasses are fine crystal, and the liquid is illuminated by a subtle purple glow from beneath the table. The table itself is a slab of polished silver granite. In the background, soft bokeh of warm party lights and the suggestion of a refined, intimate crowd." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkYdSH1mNSQhUPA1sEciAxkm7hSZfbqH8mOxfbjhA-_rvITWVbdxz7diHZVpNthOvHL1udUxfwI53aH4U7r5fUIqSZSbxVy8uCY9Y3PhN3lDSdU-I1vnrxurvcThZ69Swcx8mZ7Kzbz_xOiUlU_gSbxu24MZPTNLlqYSFBmCOn5Hu5ieuAsf0vJ9wzR13Q5ja22gOWq6J_leohG4VFCU-3_2KwUFlFh4-N8iSVdUBFdFiHIhubHTd-Oag8CZn2SADeZA8xb2z-gw"/>
+</div>
+<div class="break-inside-avoid rounded-lg overflow-hidden glass-surface">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="An outdoor luxury event stage at night, featuring a world-renowned pianist performing on a transparent glass grand piano. The stage is surrounded by a shallow pool of water that reflects the purple and silver stage lights. The setting is a cliffside venue overlooking the ocean, with the moon visible in a dark, clear sky. Highly cinematic and exclusive mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN3fh5ZDKGSSM9ixSN3QfGO5rb1gCalIQh0jZxhFUVzYdamSreAOvcqpO_seiCEoBx53h1pnItQbAKqMA-lkTA2Z1c3_NgNPq69kMn_LzRJcAQIKxi_GL5KXq1YyAYvRbqb3oN7WqSAU0afePeGQH3_BqDJqDuULgQ_xJnB4gbgUP_80HTQAAtdD5hof_cdC_oVNR5TgZ1e-Zr80j54nHpoLGfOTH8ZSs1U8h49dL0jj2He9kK49hAjKyAGRIvnzSdCulRRzl26A"/>
+</div>
+<div class="break-inside-avoid rounded-lg overflow-hidden glass-surface">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Detail of a luxury event invitation suite. Thick, heavy cardstock in deep obsidian with silver foil lettering. The envelope is lined with a dark purple silk pattern. It rests on a reflective silver surface alongside a single stem of a dark rose. Represents the extreme attention to detail and premium quality of Evara events." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP9UFDrsVYg_-bx2cEdxJhzsAz9YAq0EcVNi7HQooEETjxBi_88zHtNW7DdxGyHXdHmXaHBy5pmijRhaBLBvKlaiJYVEbKkkBAbDzSogRZSAkqo3D-8F5eqeMtSJ3Q-wwT5-l9-ocRDy3BM2Y5zbYvX0kdlc-gLtE0KTckUVKk8OkWrAPyXEtQF9z_qwL6DJcJFjXgPigE9FxMMucot8CMVCYRwObaxEYNkEtSvMefWQqTZTF2TozQKF-ZcsuN0EqevxqIeMC6Rw"/>
+</div>
+</div>
+</section>
+<!-- Timeline / Process Section -->
+<section class="py-32 bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div>
+<h2 class="font-display-lg text-headline-md text-on-surface mb-8">A Journey of Precision</h2>
+<div class="space-y-12">
+<div class="timeline-node flex gap-8">
+<div class="relative z-10 w-12 h-12 shrink-0 rounded-full glass-surface flex items-center justify-center border-primary/40">
+<div class="w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_#ddb7ff]"></div>
+</div>
+<div>
+<h4 class="font-display-lg text-headline-sm text-on-surface mb-2">The Vision Session</h4>
+<p class="font-body-md text-on-surface-variant">We begin with an in-depth exploration of your aesthetic preferences, functional needs, and the emotional resonance you wish to achieve.</p>
+</div>
+</div>
+<div class="timeline-node flex gap-8">
+<div class="relative z-10 w-12 h-12 shrink-0 rounded-full glass-surface flex items-center justify-center border-primary/40">
+<div class="w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_#ddb7ff]"></div>
+</div>
+<div>
+<h4 class="font-display-lg text-headline-sm text-on-surface mb-2">Spatial Architecture</h4>
+<p class="font-body-md text-on-surface-variant">Our designers create comprehensive 3D blueprints and sensory boards, allowing you to inhabit the event before the first guest arrives.</p>
+</div>
+</div>
+<div class="timeline-node flex gap-8">
+<div class="relative z-10 w-12 h-12 shrink-0 rounded-full glass-surface flex items-center justify-center border-primary/40">
+<div class="w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_#ddb7ff]"></div>
+</div>
+<div>
+<h4 class="font-display-lg text-headline-sm text-on-surface mb-2">The Orchestration</h4>
+<p class="font-body-md text-on-surface-variant">Absolute logistical command. We manage every variable with microscopic attention to detail, ensuring a flawless execution.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 glass-surface blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+<img class="relative z-10 rounded-lg shadow-2xl" data-alt="A professional luxury event planner from Evara seen from the back, overlooking a massive grand hall setup. They are holding a sleek silver tablet displaying a 3D floor plan. The hall is being transformed with hundreds of white flowers and silver structures. The lighting is bright and clean, showing the industrial yet high-end nature of the preparation process. The tone is professional, focused, and masterful." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU9HdbL0IQ2fipDYlhvlYSmCnjSEWhOUKbgHQQNOy5RLe0UdyettYGdYia4H4gDZf4dIPiqmTgnL_qVLvWBrFkDukUp7VF1GPmtbKibpeqVNKJEo4jHig2mAwC_lyxx9XdC-lFTaKjjokwaJUdfQVJWJN2-k1nxmQOAeTNbF_AwbuKfJ0zk8SM25Rd-j1aT6EbcAH6fS3Wk0Ts6hKktnCmrzq4zLvQmGdO69d_mZYRvBHgbCrkvkmSixppWmoqatbEGU5VCvGQZQ"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-32 px-gutter max-w-container-max mx-auto" id="testimonials">
+<div class="text-center mb-20">
+<h2 class="font-display-lg text-headline-md text-on-surface">Echoes of Excellence</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="glass-floating p-12 rounded-lg relative">
+<span class="material-symbols-outlined text-primary/20 text-8xl absolute top-6 right-6" data-icon="format_quote">format_quote</span>
+<p class="font-body-lg text-body-lg text-on-surface italic relative z-10 mb-8 leading-relaxed">"Evara didn't just plan our gala; they created a cultural milestone for our firm. The precision, the elegance, and the sheer audacity of the design was breathtaking."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-primary/30">
+<img class="w-full h-full object-cover" data-alt="A portrait of a sophisticated woman in her 40s, wearing an elegant silver silk gown. She has a serene, confident expression and is photographed in soft, high-key lighting that emphasizes her status as a high-net-worth client. The background is a blurred luxury interior with hints of deep purple. Professional photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEoTH4dZpGvvZEJOlrtpET8hUazY0CqC-uL1VNSTN8Rcv_CYKiyBGzSVyni9ol-GjnJMD6OR1Pbxc6I5Y392s4TtsVD-sqCO5xzUYERi8ma79izk-7AUN8uNBVgUH_VNe4cakHvJdLTvL3uAl4JSYyNcoUrPHetSI9Y6mukgSPepxXH80Mu7zkDIHZdTSEZrJAJOqMcpTc1bsv5ZzfQ_kjScjiQ75gbVnx4CnbZIS_TUbSabiD0-DkICL1XtYbnXo4wYrw6WLiWA"/>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface">Alexandra Sterling</p>
+<p class="font-body-md text-sm text-on-surface-variant">CEO, Sterling &amp; Co. Global</p>
+</div>
+</div>
+</div>
+<div class="glass-floating p-12 rounded-lg relative">
+<span class="material-symbols-outlined text-primary/20 text-8xl absolute top-6 right-6" data-icon="format_quote">format_quote</span>
+<p class="font-body-lg text-body-lg text-on-surface italic relative z-10 mb-8 leading-relaxed">"For our private island wedding, Evara managed the impossible. Their ability to fuse world-class logistics with intimate, poetic details is truly unmatched."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-primary/30">
+<img class="w-full h-full object-cover" data-alt="A portrait of a distinguished gentleman in a tailored black tuxedo, looking off-camera with a smile. He exudes a sense of quiet luxury and satisfaction. The lighting is warm and cinematic, suggesting he is at a high-end celebration. High-quality editorial portrait style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaYOh7g0n8NsowAUV-Q0u6oLRjSgiNSluF9J2WemWmJaAqt2gZDMXOSNBbZwXK8Ij9bRd2fVGeeXUO6PX6AXdL8w9eGQZDBX7YuLo8Kzpgolc0sOHHyWSQ9VIjOSOjuVKddlLwuDILIj0Fx_eQJurR4ynL-2VJ2Zvuix1vXtC7AVxHSSp3yFkSuxOXkJAOUNEza73qCdN8a8NSKDTdCQEm59F8eZntLus3GK0spjhQuIkCzNenbrrOhsPDLsu507_IlejcVT5k9w"/>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface">Julian Rothschild</p>
+<p class="font-body-md text-sm text-on-surface-variant">Private Collector</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-32 px-gutter max-w-container-max mx-auto" id="contact">
+<div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-2xl">
+<!-- Left Side: Brand/Contact Info -->
+<div class="md:w-2/5 bg-primary p-10 md:p-16 flex flex-col justify-center space-y-8">
+<h2 class="font-display-lg text-headline-md text-on-primary leading-tight">Ready to make an impact?</h2>
+<p class="font-body-md text-on-primary/80">Tell us about your event vision and we'll help you bring it to life with precision and style.</p>
+<div class="space-y-6 pt-4">
+<div class="flex items-center gap-4 text-on-primary">
+<span class="material-symbols-outlined">call</span>
+<span class="font-body-md">+1 (555) 890-EVARA</span>
+</div>
+<div class="flex items-center gap-4 text-on-primary">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-body-md">hello@eventsbyevara.com</span>
+</div>
+<div class="flex items-center gap-4 text-on-primary">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-body-md">London • Dubai • New York</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Form -->
+<div class="md:w-3/5 bg-surface-container-lowest p-10 md:p-16">
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Full Name</label>
+<input class="w-full bg-surface-container border-0 border-b border-secondary/20 p-3 text-on-surface input-glow focus:ring-0" placeholder="Your distinguished name" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Email Address</label>
+<input class="w-full bg-surface-container border-0 border-b border-secondary/20 p-3 text-on-surface input-glow focus:ring-0" placeholder="your@email.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Event Type</label>
+<div class="relative">
+<select class="w-full bg-surface-container border-0 border-b border-secondary/20 p-3 text-on-surface input-glow focus:ring-0 appearance-none">
+<option>Wedding</option>
+<option>Corporate Gala</option>
+<option>Private Soirée</option>
+<option>Exhibition</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Message</label>
+<textarea class="w-full bg-surface-container border-0 border-b border-secondary/20 p-3 text-on-surface input-glow focus:ring-0" placeholder="Describe the atmosphere you wish to create..." rows="4"></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary py-5 font-label-caps text-label-caps rounded-sm hover:opacity-90 transition-opacity shadow-lg glow-hover" type="submit">
+          Request a Proposal
+        </button>
+</form>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container-lowest border-t border-secondary/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-unit">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-display-lg text-headline-md text-on-surface">Evara</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs text-center md:text-left">Architects of Atmosphere. Curators of the Extraordinary.</p>
+</div>
+<nav class="flex flex-wrap justify-center gap-8 py-8 md:py-0">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Luxury Standards</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Global Press</a>
+</nav>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="share">share</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="public">public</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined" data-icon="mail">mail</span></a>
+</div>
+</div>
+<div class="mt-12 text-center border-t border-secondary/5 pt-8">
+<p class="font-body-md text-body-md text-on-surface-variant/50">© 2024 Events By Evara. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        // Micro-interaction for glass cards
+        document.querySelectorAll('.glass-floating').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Simple scroll reveal
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>
