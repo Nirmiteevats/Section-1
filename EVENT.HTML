@@ -1,0 +1,682 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events By Evara | Event Management</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    html,
+    body {
+      font-family: 'Instrument Serif', serif;
+      background: #120019;
+      color: white;
+    }
+
+    .font-body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .liquid-glass {
+      background: rgba(255, 255, 255, 0.06);
+      background-blend-mode: luminosity;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: none;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.14);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .liquid-glass::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.4px;
+      background: linear-gradient(180deg,
+        rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
+        rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+        rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+      animation: slowZoom 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowZoom {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.08);
+      }
+    }
+
+    .mobile-panel {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.98);
+      transition: opacity 500ms cubic-bezier(0.4,0,0.2,1),
+                  transform 500ms cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .mobile-panel.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    .mobile-link {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 500ms cubic-bezier(0.4,0,0.2,1),
+                  transform 500ms cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .mobile-panel.open .mobile-link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-link:nth-child(1) { transition-delay: 100ms; }
+    .mobile-link:nth-child(2) { transition-delay: 150ms; }
+    .mobile-link:nth-child(3) { transition-delay: 200ms; }
+    .mobile-link:nth-child(4) { transition-delay: 250ms; }
+    .mobile-link:nth-child(5) { transition-delay: 300ms; }
+    .mobile-link:nth-child(6) { transition-delay: 350ms; }
+
+    #menuIcon,
+    #closeIcon {
+      transition: opacity 300ms ease, transform 300ms ease;
+    }
+
+    #closeIcon {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.75);
+    }
+
+    #menuButton.menu-active #menuIcon {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.75);
+    }
+
+    #menuButton.menu-active #closeIcon {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    .gallery-img {
+      transition: transform 700ms ease, filter 700ms ease;
+    }
+
+    .gallery-card:hover .gallery-img {
+      transform: scale(1.08);
+      filter: brightness(1.08);
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body class="overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <header class="fixed inset-x-0 top-0 z-[60]">
+    <div class="mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center justify-between">
+        <a href="#home" class="text-2xl italic text-white sm:text-3xl">
+          Events By <span class="text-yellow-300">Evara</span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="liquid-glass hidden items-center gap-1 rounded-full px-3 py-2 md:flex">
+          <a href="#events" class="font-body rounded-full px-4 py-2 text-sm text-white/85 transition hover:text-white">Types</a>
+          <a href="#services" class="font-body rounded-full px-4 py-2 text-sm text-white/85 transition hover:text-white">Services</a>
+          <a href="#gallery" class="font-body rounded-full px-4 py-2 text-sm text-white/85 transition hover:text-white">Gallery</a>
+          <a href="#testimonials" class="font-body rounded-full px-4 py-2 text-sm text-white/85 transition hover:text-white">Testimonials</a>
+          <a href="#contact" class="font-body ml-2 rounded-full bg-white px-5 py-2 text-sm font-semibold text-purple-950 transition hover:bg-yellow-300">
+            Book Event
+          </a>
+        </div>
+
+        <!-- Mobile Button -->
+        <button
+          id="menuButton"
+          class="liquid-glass relative flex h-11 w-11 items-center justify-center rounded-full text-white md:hidden"
+          aria-label="Toggle Menu"
+          aria-expanded="false"
+        >
+          <i id="menuIcon" data-lucide="menu" class="absolute h-5 w-5"></i>
+          <i id="closeIcon" data-lucide="x" class="absolute h-5 w-5"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="mobile-panel fixed inset-0 z-50 bg-black/70 backdrop-blur-md md:hidden">
+    <div class="mobile-links flex min-h-screen flex-col items-center justify-center gap-8 px-6 text-center">
+      <a data-mobile-link href="#home" class="mobile-link text-4xl text-white">Home</a>
+      <a data-mobile-link href="#events" class="mobile-link text-4xl text-white">Types</a>
+      <a data-mobile-link href="#services" class="mobile-link text-4xl text-white">Services</a>
+      <a data-mobile-link href="#gallery" class="mobile-link text-4xl text-white">Gallery</a>
+      <a data-mobile-link href="#testimonials" class="mobile-link text-4xl text-white">Testimonials</a>
+      <a data-mobile-link href="#contact" class="mobile-link font-body rounded-full bg-yellow-300 px-8 py-4 text-base font-bold text-purple-950">
+        Book Your Event
+      </a>
+    </div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="relative flex min-h-screen items-center overflow-hidden bg-purple-950">
+    <div class="hero-bg"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-950/95 via-purple-900/70 to-black/80"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(253,224,71,0.28),transparent_32%),radial-gradient(circle_at_80%_70%,rgba(168,85,247,0.35),transparent_35%)]"></div>
+
+    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-4 py-28 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
+      <div>
+        <div class="liquid-glass mb-6 inline-flex rounded-full px-5 py-2">
+          <p class="font-body text-xs font-medium uppercase tracking-[0.25em] text-yellow-200">
+            Luxury Event Management
+          </p>
+        </div>
+
+        <h1 class="max-w-4xl text-5xl leading-[1.05] text-white sm:text-6xl md:text-7xl lg:text-[5.7rem]">
+          Creating Events That Feel Like Magic.
+        </h1>
+
+        <p class="font-body mt-6 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
+          From weddings and private parties to corporate launches and grand celebrations,
+          Events By Evara plans, designs, and manages unforgettable experiences with style,
+          precision, and heart.
+        </p>
+
+        <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+          <a href="#contact" class="font-body rounded-full bg-yellow-300 px-8 py-4 text-center text-sm font-bold text-purple-950 transition hover:bg-white">
+            Plan My Event
+          </a>
+          <a href="#gallery" class="font-body liquid-glass rounded-full px-8 py-4 text-center text-sm font-semibold text-white transition hover:bg-white/10">
+            View Our Work
+          </a>
+        </div>
+
+        <div class="font-body mt-12 grid grid-cols-2 gap-5 text-white/75 sm:flex sm:flex-wrap sm:gap-10">
+          <div>
+            <p class="text-3xl font-bold text-yellow-300">250+</p>
+            <p class="text-sm">Events Planned</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-yellow-300">50+</p>
+            <p class="text-sm">Luxury Venues</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-yellow-300">4.9</p>
+            <p class="text-sm">Client Rating</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="absolute -inset-6 rounded-[3rem] bg-yellow-300/20 blur-3xl"></div>
+
+        <div class="liquid-glass relative rounded-[2rem] p-5 sm:p-6">
+          <img
+            src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=900&q=80"
+            alt="Luxury event table decoration"
+            class="h-72 w-full rounded-[1.5rem] object-cover sm:h-96"
+          />
+
+          <div class="mt-6">
+            <p class="font-body text-sm uppercase tracking-[0.25em] text-yellow-200">Signature Planning</p>
+            <h3 class="mt-2 text-3xl text-white">Elegant. Seamless. Memorable.</h3>
+            <p class="font-body mt-3 text-sm leading-relaxed text-white/70">
+              Our team handles concept, decor, vendors, timeline, and on-site execution,
+              so you can simply enjoy your moment.
+            </p>
+          </div>
+
+          <div class="font-body mt-6 grid grid-cols-2 gap-3">
+            <div class="rounded-2xl bg-white/10 p-4">
+              <p class="text-xs text-white/60">Starting From</p>
+              <p class="mt-1 text-xl font-bold text-yellow-300">$999</p>
+            </div>
+            <div class="rounded-2xl bg-white/10 p-4">
+              <p class="text-xs text-white/60">Consultation</p>
+              <p class="mt-1 text-xl font-bold text-yellow-300">Free</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES OF EVENT -->
+  <section id="events" class="bg-[#170020] py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="font-body text-xs font-bold uppercase tracking-[0.35em] text-yellow-300">Types of Event</p>
+        <h2 class="mt-4 text-4xl text-white sm:text-5xl md:text-6xl">Every Occasion, Beautifully Designed</h2>
+        <p class="font-body mt-5 text-white/65">
+          Whether intimate or extravagant, we craft events that reflect your story, style, and purpose.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <article class="liquid-glass group rounded-[1.75rem] p-6 transition duration-300 hover:-translate-y-2">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-300/15 text-yellow-300">
+            <i data-lucide="heart" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-3xl text-white">Weddings</h3>
+          <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+            Dream weddings with elegant themes, decor, rituals, guest flow, and flawless coordination.
+          </p>
+        </article>
+
+        <article class="liquid-glass group rounded-[1.75rem] p-6 transition duration-300 hover:-translate-y-2">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-300/15 text-yellow-300">
+            <i data-lucide="briefcase" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-3xl text-white">Corporate Events</h3>
+          <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+            Conferences, launches, award nights, team events, and executive gatherings with polish.
+          </p>
+        </article>
+
+        <article class="liquid-glass group rounded-[1.75rem] p-6 transition duration-300 hover:-translate-y-2">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-300/15 text-yellow-300">
+            <i data-lucide="cake" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-3xl text-white">Birthdays</h3>
+          <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+            Theme birthdays, milestone celebrations, kids’ parties, and luxury private dinners.
+          </p>
+        </article>
+
+        <article class="liquid-glass group rounded-[1.75rem] p-6 transition duration-300 hover:-translate-y-2">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-300/15 text-yellow-300">
+            <i data-lucide="music" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-3xl text-white">Concerts & Shows</h3>
+          <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+            Stage design, sound, lighting, artist management, crowd flow, and show production.
+          </p>
+        </article>
+
+        <article class="liquid-glass group rounded-[1.75rem] p-6 transition duration-300 hover:-translate-y-2">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-300/15 text-yellow-300">
+            <i data-lucide="gift" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-3xl text-white">Baby Showers</h3>
+          <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+            Sweet, thoughtful, photo-ready celebrations for parents-to-be and loved ones.
+          </p>
+        </article>
+
+        <article class="liquid-glass group rounded-[1.75rem] p-6 transition duration-300 hover:-translate-y-2">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-300/15 text-yellow-300">
+            <i data-lucide="sparkles" class="h-6 w-6"></i>
+          </div>
+          <h3 class="text-3xl text-white">Private Parties</h3>
+          <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+            Cocktail nights, anniversaries, festive celebrations, and exclusive social gatherings.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="relative bg-purple-950 py-24">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(253,224,71,0.18),transparent_35%)]"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div>
+          <p class="font-body text-xs font-bold uppercase tracking-[0.35em] text-yellow-300">Services</p>
+          <h2 class="mt-4 text-4xl text-white sm:text-5xl md:text-6xl">
+            End-to-End Event Planning
+          </h2>
+          <p class="font-body mt-5 leading-relaxed text-white/65">
+            We manage every detail from first idea to final applause. Our planning process is creative,
+            organized, transparent, and completely tailored to you.
+          </p>
+
+          <a href="#contact" class="font-body mt-8 inline-flex rounded-full bg-yellow-300 px-7 py-4 text-sm font-bold text-purple-950 transition hover:bg-white">
+            Request a Proposal
+          </a>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div class="liquid-glass rounded-[1.75rem] p-6">
+            <i data-lucide="palette" class="h-7 w-7 text-yellow-300"></i>
+            <h3 class="mt-5 text-2xl">Concept & Theme</h3>
+            <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+              Moodboards, styling direction, color palettes, and event identity.
+            </p>
+          </div>
+
+          <div class="liquid-glass rounded-[1.75rem] p-6">
+            <i data-lucide="map-pin" class="h-7 w-7 text-yellow-300"></i>
+            <h3 class="mt-5 text-2xl">Venue Selection</h3>
+            <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+              Perfect venue recommendations, layout planning, and booking support.
+            </p>
+          </div>
+
+          <div class="liquid-glass rounded-[1.75rem] p-6">
+            <i data-lucide="badge-check" class="h-7 w-7 text-yellow-300"></i>
+            <h3 class="mt-5 text-2xl">Vendor Management</h3>
+            <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+              Coordination with decorators, caterers, photographers, artists, and more.
+            </p>
+          </div>
+
+          <div class="liquid-glass rounded-[1.75rem] p-6">
+            <i data-lucide="utensils" class="h-7 w-7 text-yellow-300"></i>
+            <h3 class="mt-5 text-2xl">Catering Planning</h3>
+            <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+              Menu curation, tasting coordination, service style, and guest experience.
+            </p>
+          </div>
+
+          <div class="liquid-glass rounded-[1.75rem] p-6">
+            <i data-lucide="camera" class="h-7 w-7 text-yellow-300"></i>
+            <h3 class="mt-5 text-2xl">Photo & Video</h3>
+            <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+              Capture teams, shot planning, highlight films, reels, and memory albums.
+            </p>
+          </div>
+
+          <div class="liquid-glass rounded-[1.75rem] p-6">
+            <i data-lucide="calendar-check" class="h-7 w-7 text-yellow-300"></i>
+            <h3 class="mt-5 text-2xl">On-site Execution</h3>
+            <p class="font-body mt-3 text-sm leading-relaxed text-white/65">
+              Timeline management, guest handling, vendor supervision, and final checks.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="bg-[#170020] py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="font-body text-xs font-bold uppercase tracking-[0.35em] text-yellow-300">Gallery</p>
+        <h2 class="mt-4 text-4xl text-white sm:text-5xl md:text-6xl">Moments We Have Designed</h2>
+        <p class="font-body mt-5 text-white/65">
+          A glimpse into elegant setups, glowing lights, joyful gatherings, and unforgettable celebrations.
+        </p>
+      </div>
+
+      <div class="mt-14 grid auto-rows-[180px] grid-cols-2 gap-4 sm:auto-rows-[220px] md:grid-cols-4">
+        <div class="gallery-card col-span-2 row-span-2 overflow-hidden rounded-[2rem]">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=80" alt="Wedding decoration" class="gallery-img h-full w-full object-cover">
+        </div>
+
+        <div class="gallery-card overflow-hidden rounded-[2rem]">
+          <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=800&q=80" alt="Party celebration" class="gallery-img h-full w-full object-cover">
+        </div>
+
+        <div class="gallery-card overflow-hidden rounded-[2rem]">
+          <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=800&q=80" alt="Concert event" class="gallery-img h-full w-full object-cover">
+        </div>
+
+        <div class="gallery-card overflow-hidden rounded-[2rem]">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Banquet setup" class="gallery-img h-full w-full object-cover">
+        </div>
+
+        <div class="gallery-card overflow-hidden rounded-[2rem]">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80" alt="Corporate conference" class="gallery-img h-full w-full object-cover">
+        </div>
+
+        <div class="gallery-card col-span-2 overflow-hidden rounded-[2rem]">
+          <img src="https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=1000&q=80" alt="Dinner event" class="gallery-img h-full w-full object-cover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="bg-purple-950 py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="font-body text-xs font-bold uppercase tracking-[0.35em] text-yellow-300">Testimonials</p>
+        <h2 class="mt-4 text-4xl text-white sm:text-5xl md:text-6xl">Loved by Our Clients</h2>
+      </div>
+
+      <div class="mt-14 grid gap-5 md:grid-cols-3">
+        <article class="liquid-glass rounded-[1.75rem] p-7">
+          <div class="mb-5 flex gap-1 text-yellow-300">
+            ★★★★★
+          </div>
+          <p class="font-body leading-relaxed text-white/75">
+            “Evara turned our wedding into a dream. Every detail was elegant, organized,
+            and exactly how we imagined.”
+          </p>
+          <div class="mt-7 flex items-center gap-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-300 font-body font-bold text-purple-950">A</div>
+            <div>
+              <h4 class="font-body font-bold text-white">Aarohi Mehta</h4>
+              <p class="font-body text-sm text-white/55">Bride</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="liquid-glass rounded-[1.75rem] p-7">
+          <div class="mb-5 flex gap-1 text-yellow-300">
+            ★★★★★
+          </div>
+          <p class="font-body leading-relaxed text-white/75">
+            “Our product launch looked premium and ran perfectly on schedule.
+            The team handled everything professionally.”
+          </p>
+          <div class="mt-7 flex items-center gap-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-300 font-body font-bold text-purple-950">R</div>
+            <div>
+              <h4 class="font-body font-bold text-white">Rohan Kapoor</h4>
+              <p class="font-body text-sm text-white/55">Marketing Head</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="liquid-glass rounded-[1.75rem] p-7">
+          <div class="mb-5 flex gap-1 text-yellow-300">
+            ★★★★★
+          </div>
+          <p class="font-body leading-relaxed text-white/75">
+            “The birthday decor, entertainment, and guest experience were fantastic.
+            It felt luxurious and stress-free.”
+          </p>
+          <div class="mt-7 flex items-center gap-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-300 font-body font-bold text-purple-950">S</div>
+            <div>
+              <h4 class="font-body font-bold text-white">Simran Gill</h4>
+              <p class="font-body text-sm text-white/55">Client</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT US -->
+  <section id="contact" class="relative bg-[#170020] py-24">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(253,224,71,0.18),transparent_35%)]"></div>
+
+    <div class="relative mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+      <div>
+        <p class="font-body text-xs font-bold uppercase tracking-[0.35em] text-yellow-300">Contact Us</p>
+        <h2 class="mt-4 text-4xl text-white sm:text-5xl md:text-6xl">Let’s Plan Your Next Celebration</h2>
+        <p class="font-body mt-5 max-w-xl leading-relaxed text-white/65">
+          Tell us about your event and our planning team will connect with you to discuss ideas,
+          budget, themes, and available dates.
+        </p>
+
+        <div class="font-body mt-10 space-y-4">
+          <div class="liquid-glass flex items-center gap-4 rounded-2xl p-4">
+            <i data-lucide="phone" class="h-5 w-5 text-yellow-300"></i>
+            <span class="text-white/75">+1 234 567 8900</span>
+          </div>
+
+          <div class="liquid-glass flex items-center gap-4 rounded-2xl p-4">
+            <i data-lucide="mail" class="h-5 w-5 text-yellow-300"></i>
+            <span class="text-white/75">hello@eventsbyevara.com</span>
+          </div>
+
+          <div class="liquid-glass flex items-center gap-4 rounded-2xl p-4">
+            <i data-lucide="map-pin" class="h-5 w-5 text-yellow-300"></i>
+            <span class="text-white/75">New York, USA</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="liquid-glass rounded-[2rem] p-6 sm:p-8">
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label class="font-body mb-2 block text-sm text-white/70">Full Name</label>
+            <input type="text" placeholder="Your name" class="font-body w-full rounded-full bg-white/10 px-5 py-4 text-sm text-white outline-none placeholder:text-white/35 focus:bg-white/15">
+          </div>
+
+          <div>
+            <label class="font-body mb-2 block text-sm text-white/70">Email Address</label>
+            <input type="email" placeholder="you@example.com" class="font-body w-full rounded-full bg-white/10 px-5 py-4 text-sm text-white outline-none placeholder:text-white/35 focus:bg-white/15">
+          </div>
+
+          <div>
+            <label class="font-body mb-2 block text-sm text-white/70">Phone Number</label>
+            <input type="tel" placeholder="+1 234 567 8900" class="font-body w-full rounded-full bg-white/10 px-5 py-4 text-sm text-white outline-none placeholder:text-white/35 focus:bg-white/15">
+          </div>
+
+          <div>
+            <label class="font-body mb-2 block text-sm text-white/70">Event Type</label>
+            <select class="font-body w-full rounded-full bg-white/10 px-5 py-4 text-sm text-white outline-none focus:bg-white/15">
+              <option class="text-purple-950">Wedding</option>
+              <option class="text-purple-950">Corporate Event</option>
+              <option class="text-purple-950">Birthday</option>
+              <option class="text-purple-950">Private Party</option>
+              <option class="text-purple-950">Other</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="font-body mb-2 block text-sm text-white/70">Event Date</label>
+            <input type="date" class="font-body w-full rounded-full bg-white/10 px-5 py-4 text-sm text-white outline-none focus:bg-white/15">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="font-body mb-2 block text-sm text-white/70">Message</label>
+            <textarea rows="5" placeholder="Tell us about your event..." class="font-body w-full resize-none rounded-3xl bg-white/10 px-5 py-4 text-sm text-white outline-none placeholder:text-white/35 focus:bg-white/15"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="font-body mt-6 w-full rounded-full bg-yellow-300 px-8 py-4 text-sm font-bold text-purple-950 transition hover:bg-white">
+          Send Inquiry
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 bg-[#100016] py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 md:grid-cols-4">
+        <div class="md:col-span-2">
+          <a href="#home" class="text-3xl italic text-white">
+            Events By <span class="text-yellow-300">Evara</span>
+          </a>
+          <p class="font-body mt-4 max-w-md text-sm leading-relaxed text-white/60">
+            Premium event management for weddings, corporate events, parties, launches,
+            and unforgettable celebrations.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-body font-bold text-white">Quick Links</h4>
+          <div class="font-body mt-4 space-y-3 text-sm text-white/60">
+            <a href="#events" class="block hover:text-yellow-300">Types of Event</a>
+            <a href="#services" class="block hover:text-yellow-300">Services</a>
+            <a href="#gallery" class="block hover:text-yellow-300">Gallery</a>
+            <a href="#contact" class="block hover:text-yellow-300">Contact Us</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-body font-bold text-white">Follow Us</h4>
+          <div class="mt-4 flex gap-3">
+            <a href="#" class="liquid-glass flex h-10 w-10 items-center justify-center rounded-full text-white hover:text-yellow-300">
+              <i data-lucide="instagram" class="h-5 w-5"></i>
+            </a>
+            <a href="#" class="liquid-glass flex h-10 w-10 items-center justify-center rounded-full text-white hover:text-yellow-300">
+              <i data-lucide="facebook" class="h-5 w-5"></i>
+            </a>
+            <a href="#" class="liquid-glass flex h-10 w-10 items-center justify-center rounded-full text-white hover:text-yellow-300">
+              <i data-lucide="twitter" class="h-5 w-5"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="font-body mt-10 border-t border-white/10 pt-6 text-center text-sm text-white/45">
+        © <span id="year"></span> Events By Evara. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileLinks = document.querySelectorAll("[data-mobile-link]");
+
+    function toggleMenu(open) {
+      menuButton.classList.toggle("menu-active", open);
+      mobileMenu.classList.toggle("open", open);
+      document.body.classList.toggle("menu-open", open);
+      menuButton.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    menuButton.addEventListener("click", () => {
+      toggleMenu(!mobileMenu.classList.contains("open"));
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener("click", () => toggleMenu(false));
+    });
+
+    window.addEventListener("keydown", e => {
+      if (e.key === "Escape") toggleMenu(false);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+```

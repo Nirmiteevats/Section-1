@@ -1,0 +1,700 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events By Evara - Creating Unforgettable Moments</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-family: 'Instrument Serif', serif;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: #0f0518;
+            overflow-x: hidden;
+        }
+
+        /* Liquid Glass Effect - Adapted for Purple Theme */
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.03);
+            background-blend-mode: luminosity;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: none;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 
+                        0 4px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .liquid-glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: linear-gradient(180deg,
+                rgba(255,255,255,0.5) 0%, 
+                rgba(255,255,255,0.2) 20%,
+                rgba(255,255,255,0) 40%, 
+                rgba(255,255,255,0) 60%,
+                rgba(255,255,255,0.2) 80%, 
+                rgba(255,255,255,0.5) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .liquid-glass-dark {
+            background: rgba(91, 33, 182, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1),
+                        0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .liquid-glass-dark::before {
+            background: linear-gradient(180deg,
+                rgba(252, 211, 77, 0.6) 0%, 
+                rgba(252, 211, 77, 0.2) 20%,
+                rgba(252, 211, 77, 0) 40%, 
+                rgba(252, 211, 77, 0) 60%,
+                rgba(252, 211, 77, 0.2) 80%, 
+                rgba(252, 211, 77, 0.6) 100%);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1.03); }
+            50% { transform: translateY(-6px) scale(1.03); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .stagger-1 { animation-delay: 100ms; }
+        .stagger-2 { animation-delay: 200ms; }
+        .stagger-3 { animation-delay: 300ms; }
+        .stagger-4 { animation-delay: 400ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1b4b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7c3aed;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fcd34d;
+        }
+
+        /* Gradient Text */
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Background Animation */
+        .hero-bg {
+            background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #0f0518 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Image Hover Zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom-container img {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .img-zoom-container:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        
+        // Icons
+        const Menu = () => <i data-lucide="menu" className="w-6 h-6"></i>;
+        const X = () => <i data-lucide="x" className="w-6 h-6"></i>;
+        const ChevronRight = () => <i data-lucide="chevron-right" className="w-5 h-5"></i>;
+        const Star = () => <i data-lucide="star" className="w-5 h-5 fill-amber-400 text-amber-400"></i>;
+        const Calendar = () => <i data-lucide="calendar" className="w-5 h-5"></i>;
+        const MapPin = () => <i data-lucide="map-pin" className="w-5 h-5"></i>;
+        const Phone = () => <i data-lucide="phone" className="w-5 h-5"></i>;
+        const Mail = () => <i data-lucide="mail" className="w-5 h-5"></i>;
+        const Heart = () => <i data-lucide="heart" className="w-5 h-5"></i>;
+        const Users = () => <i data-lucide="users" className="w-5 h-5"></i>;
+        const Sparkles = () => <i data-lucide="sparkles" className="w-5 h-5"></i>;
+        const ArrowRight = () => <i data-lucide="arrow-right" className="w-5 h-5"></i>;
+
+        // Navigation Component
+        const Navigation = () => {
+            const [isOpen, setIsOpen] = useState(false);
+            const [scrolled, setScrolled] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                lucide.createIcons();
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            useEffect(() => {
+                lucide.createIcons();
+            }, [isOpen]);
+
+            const navLinks = [
+                { name: 'Services', href: '#services' },
+                { name: 'Events', href: '#events' },
+                { name: 'Gallery', href: '#gallery' },
+                { name: 'Testimonials', href: '#testimonials' },
+            ];
+
+            return (
+                <>
+                    <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${scrolled ? 'py-3' : 'py-6'}`}>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex items-center justify-between">
+                                {/* Logo */}
+                                <div className="flex items-center">
+                                    <span className="text-2xl sm:text-3xl text-white italic font-serif tracking-wide">
+                                        Evara
+                                    </span>
+                                    <span className="ml-2 text-amber-400 text-xs uppercase tracking-[0.2em] hidden sm:block">Events</span>
+                                </div>
+
+                                {/* Desktop Navigation */}
+                                <div className="hidden md:flex items-center">
+                                    <div className="liquid-glass rounded-full px-2 py-2 flex items-center space-x-1">
+                                        {navLinks.map((link) => (
+                                            <a
+                                                key={link.name}
+                                                href={link.href}
+                                                className="px-4 py-2 text-sm text-white/90 hover:text-white rounded-full transition-all duration-300 hover:bg-white/10"
+                                                style={{fontFamily: 'Inter, system-ui, sans-serif'}}
+                                            >
+                                                {link.name}
+                                            </a>
+                                        ))}
+                                        <a
+                                            href="#contact"
+                                            className="ml-2 px-6 py-2 bg-amber-400 text-purple-900 rounded-full text-sm font-semibold hover:bg-amber-300 transition-all duration-300 transform hover:scale-105"
+                                            style={{fontFamily: 'Inter, system-ui, sans-serif'}}
+                                        >
+                                            Book Now
+                                        </a>
+                                    </div>
+                                </div>
+
+                                {/* Mobile Menu Button */}
+                                <button
+                                    onClick={() => setIsOpen(!isOpen)}
+                                    className="md:hidden liquid-glass rounded-full p-3 text-white relative w-12 h-12 flex items-center justify-center"
+                                >
+                                    <div className={`absolute transition-all duration-300 ${isOpen ? 'rotate-90 opacity-0 scale-75' : 'rotate-0 opacity-100 scale-100'}`}>
+                                        <Menu />
+                                    </div>
+                                    <div className={`absolute transition-all duration-300 ${isOpen ? 'rotate-0 opacity-100 scale-100' : '-rotate-90 opacity-0 scale-75'}`}>
+                                        <X />
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </nav>
+
+                    {/* Mobile Menu Overlay */}
+                    <div className={`fixed inset-0 z-30 md:hidden transition-all duration-500 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                        <div className="absolute inset-0 bg-purple-950/95 backdrop-blur-xl" onClick={() => setIsOpen(false)}></div>
+                        <div className="relative h-full flex flex-col items-center justify-center space-y-8">
+                            {navLinks.map((link, index) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setIsOpen(false)}
+                                    className={`text-3xl text-white hover:text-amber-400 transition-all duration-500 transform ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+                                    style={{
+                                        fontFamily: 'Instrument Serif, serif',
+                                        transitionDelay: isOpen ? `${(index + 1) * 50}ms` : '0ms',
+                                        transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                                    }}
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                            <a
+                                href="#contact"
+                                onClick={() => setIsOpen(false)}
+                                className={`mt-8 px-8 py-4 bg-amber-400 text-purple-900 rounded-full text-lg font-semibold transition-all duration-500 transform hover:scale-105 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
+                                style={{
+                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                    transitionDelay: isOpen ? '300ms' : '0ms',
+                                    transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                                }}
+                            >
+                                Book Consultation
+                            </a>
+                        </div>
+                    </div>
+                </>
+            );
+        };
+
+        // Hero Section
+        const Hero = () => {
+            useEffect(() => {
+                lucide.createIcons();
+            }, []);
+
+            return (
+                <section className="relative w-full h-screen overflow-hidden hero-bg">
+                    {/* Animated Background Elements */}
+                    <div className="absolute inset-0 overflow-hidden">
+                        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-float"></div>
+                        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
+                    </div>
+
+                    {/* Overlay Pattern */}
+                    <div className="absolute inset-0 opacity-20" style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                    }}></div>
+
+                    {/* Content */}
+                    <div className="relative z-10 h-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 pt-20">
+                        <div className="text-center max-w-5xl mx-auto">
+                            {/* Badge */}
+                            <div className="inline-flex items-center liquid-glass rounded-full px-4 py-2 mb-8 animate-fade-in-up">
+                                <span className="flex h-2 w-2 rounded-full bg-amber-400 mr-2"></span>
+                                <span className="text-white/90 text-sm tracking-wide" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                                    Premium Event Management Since 2015
+                                </span>
+                            </div>
+
+                            {/* Heading */}
+                            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-serif italic leading-[1.1] mb-6 animate-fade-in-up stagger-1">
+                                Creating <span className="text-gradient-gold">Unforgettable</span><br />
+                                Moments
+                            </h1>
+
+                            {/* Subtext */}
+                            <p className="mt-6 text-lg sm:text-xl text-purple-200/80 max-w-2xl mx-auto leading-relaxed animate-fade-in-up stagger-2" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                                From intimate gatherings to grand celebrations, we craft bespoke experiences 
+                                that reflect your unique vision and exceed every expectation.
+                            </p>
+
+                            {/* CTA Buttons */}
+                            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up stagger-3">
+                                <a
+                                    href="#contact"
+                                    className="group px-8 py-4 bg-amber-400 text-purple-900 rounded-full font-semibold text-lg hover:bg-amber-300 transition-all duration-300 flex items-center gap-2 hover:gap-3 transform hover:scale-105"
+                                    style={{fontFamily: 'Inter, system-ui, sans-serif'}}
+                                >
+                                    Start Planning
+                                    <ArrowRight />
+                                </a>
+                                <a
+                                    href="#gallery"
+                                    className="px-8 py-4 liquid-glass text-white rounded-full font-medium text-lg hover:bg-white/10 transition-all duration-300"
+                                    style={{fontFamily: 'Inter, system-ui, sans-serif'}}
+                                >
+                                    View Our Work
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Bottom Stats */}
+                        <div className="absolute bottom-8 left-0 right-0 px-4 animate-fade-in-up stagger-4">
+                            <div className="max-w-6xl mx-auto flex flex-wrap justify-center md:justify-between items-center gap-4 md:gap-0 text-white/70 text-sm" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-amber-400 font-serif text-2xl italic">500+</span>
+                                    <span>Events Managed</span>
+                                </div>
+                                <span className="hidden md:block text-white/30">|</span>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-amber-400 font-serif text-2xl italic">98%</span>
+                                    <span>Client Satisfaction</span>
+                                </div>
+                                <span className="hidden md:block text-white/30">|</span>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-amber-400 font-serif text-2xl italic">15+</span>
+                                    <span>Industry Awards</span>
+                                </div>
+                                <span className="hidden md:block text-white/30">|</span>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-amber-400 font-serif text-2xl italic">24/7</span>
+                                    <span>Concierge Support</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Decorative Bottom Fade */}
+                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0f0518] to-transparent"></div>
+                </section>
+            );
+        };
+
+        // Types of Events Section
+        const EventTypes = () => {
+            const events = [
+                { title: 'Weddings', desc: 'Elegant ceremonies & receptions', image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=60' },
+                { title: 'Corporate', desc: 'Conferences & brand launches', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60' },
+                { title: 'Social', desc: 'Birthdays & anniversaries', image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&auto=format&fit=crop&q=60' },
+                { title: 'Cultural', desc: 'Festivals & art exhibitions', image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&auto=format&fit=crop&q=60' },
+            ];
+
+            return (
+                <section id="events" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0f0518] relative overflow-hidden">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <span className="text-amber-400 text-sm uppercase tracking-[0.2em]" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>What We Do</span>
+                            <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl text-white font-serif italic">
+                                Types of <span className="text-gradient-gold">Events</span>
+                            </h2>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {events.map((event, index) => (
+                                <div key={index} className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer">
+                                    <div className="img-zoom-container absolute inset-0">
+                                        <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                                    </div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-purple-950 via-purple-950/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+                                    <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                        <h3 className="text-2xl text-white font-serif italic mb-2">{event.title}</h3>
+                                        <p className="text-purple-200/80 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                                            {event.desc}
+                                        </p>
+                                        <div className="flex items-center text-amber-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                                            Explore <ChevronRight />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Services Section
+        const Services = () => {
+            const services = [
+                { icon: <Sparkles />, title: 'Full Planning', desc: 'End-to-end event coordination from concept to execution' },
+                { icon: <MapPin />, title: 'Venue Selection', desc: 'Access to exclusive venues and private estates' },
+                { icon: <Users />, title: 'Vendor Curation', desc: 'Hand-picked network of premium caterers, florists, and entertainers' },
+                { icon: <Calendar />, title: 'Day-of Coordination', desc: 'Seamless management during your special day' },
+                { icon: <Heart />, title: 'Design & Decor', desc: 'Bespoke aesthetic design tailored to your vision' },
+                { icon: <Mail />, title: 'Guest Management', desc: 'RSVP tracking, accommodation, and transportation' },
+            ];
+
+            useEffect(() => {
+                lucide.createIcons();
+            }, []);
+
+            return (
+                <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 bg-purple-950/30 relative">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="grid lg:grid-cols-2 gap-16 items-center">
+                            <div>
+                                <span className="text-amber-400 text-sm uppercase tracking-[0.2em]" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>Our Services</span>
+                                <h2 className="mt-4 text-4xl sm:text-5xl text-white font-serif italic leading-tight">
+                                    Crafted with <br/>
+                                    <span className="text-gradient-gold">Precision & Care</span>
+                                </h2>
+                                <p className="mt-6 text-purple-200/70 text-lg leading-relaxed" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                                    We handle every detail so you can be present in the moment. Our comprehensive 
+                                    services ensure a stress-free experience and flawless execution.
+                                </p>
+                                <div className="mt-8">
+                                    <a href="#contact" className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                                        Get Custom Quote <ArrowRight />
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="grid sm:grid-cols-2 gap-4">
+                                {services.map((service, index) => (
+                                    <div key={index} className="liquid-glass-dark p-6 rounded-2xl group hover:bg-purple-900/40 transition-all duration-500">
+                                        <div className="w-12 h-12 rounded-full bg-amber-400/20 flex items-center justify-center text-amber-400 mb-4 group-hover:scale-110 transition-transform">
+                                            {service.icon}
+                                        </div>
+                                        <h3 className="text-xl text-white font-serif italic mb-2">{service.title}</h3>
+                                        <p className="text-purple-200/60 text-sm" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                                            {service.desc}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Gallery Section
+        const Gallery = () => {
+            const images = [
+                'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop&q=60',
+                'https://images.unsplash.com/photo-1478146896981-b80c4638f0df?w=800&auto=format&fit=crop&q=60',
+                'https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=800&auto=format&fit=crop&q=60',
+                'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&auto=format&fit=crop&q=60',
+                'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&auto=format&fit=crop&q=60',
+                'https://images.unsplash.com/photo-1530023367847-a683933f4172?w=800&auto=format&fit=crop&q=60',
+            ];
+
+            return (
+                <section id="gallery" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0f0518]">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <span className="text-amber-400 text-sm uppercase tracking-[0.2em]" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>Portfolio</span>
+                            <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl text-white font-serif italic">
+                                Recent <span className="text-gradient-gold">Galleries</span>
+                            </h2>
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            {images.map((img, index) => (
+                                <div key={index} className={`relative overflow-hidden rounded-xl group cursor-pointer ${index === 0 || index === 3 ? 'md:col-span-2 md:row-span-2' : ''}`}>
+                                    <img 
+                                        src={img} 
+                                        alt={`Event ${index + 1}`} 
+                                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                    />
+                                    <div className="absolute inset-0 bg-purple-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                        <div className="w-16 h-16 rounded-full liquid-glass flex items-center justify-center text-white transform scale-0 group-hover:scale-100 transition-transform duration-500">
+                                            <span className="text-2xl">+</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Testimonials Section
+        const Testimonials = () => {
+            const testimonials = [
+                { name: 'Sarah & Michael', role: 'Wedding Clients', text: 'Evara transformed our vision into a fairy tale. Every detail was perfection.', image: 'https://images.unsplash.com/photo-1621621667797-e06afc217fb0?w=200&auto=format&fit=crop&q=60' },
+                { name: 'James Chen', role: 'CEO, TechCorp', text: 'The corporate gala they organized exceeded all expectations. Truly world-class.', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=60' },
+                { name: 'Elena Rodriguez', role: 'Birthday Celebration', text: 'Intimate, elegant, and absolutely unforgettable. The team is incredible.', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&auto=format&fit=crop&q=60' },
+            ];
+
+            useEffect(() => {
+                lucide.createIcons();
+            }, []);
+
+            return (
+                <section id="testimonials" className="py-24 px-4 sm:px-6 lg:px-8 bg-purple-950/20 relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent"></div>
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <span className="text-amber-400 text-sm uppercase tracking-[0.2em]" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>Testimonials</span>
+                            <h2 className="mt-4 text-4xl sm:text-5xl text-white font-serif italic">
+                                Client <span className="text-gradient-gold">Stories</span>
+                            </h2>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {testimonials.map((testimonial, index) => (
+                                <div key={index} className="liquid-glass p-8 rounded-2xl relative">
+                                    <div className="flex gap-1 mb-4">
+                                        {[...Array(5)].map((_, i) => <Star key={i} />)}
+                                    </div>
+                                    <p className="text-white/90 text-lg italic mb-6 font-serif leading-relaxed">"{testimonial.text}"</p>
+                                    <div className="flex items-center gap-4">
+                                        <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover border-2 border-amber-400/30" />
+                                        <div>
+                                            <div className="text-white font-medium" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>{testimonial.name}</div>
+                                            <div className="text-purple-300/70 text-sm" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>{testimonial.role}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Contact Section
+        const Contact = () => {
+            return (
+                <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0f0518] relative">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-12">
+                            <span className="text-amber-400 text-sm uppercase tracking-[0.2em]" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>Get In Touch</span>
+                            <h2 className="mt-4 text-4xl sm:text-5xl text-white font-serif italic">
+                                Let's Create <span className="text-gradient-gold">Magic</span>
+                            </h2>
+                        </div>
+
+                        <div className="liquid-glass-dark rounded-3xl p-8 md:p-12">
+                            <form className="space-y-6">
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <label className="text-white/80 text-sm uppercase tracking-wider" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>Name</label>
+                                        <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-amber-400/50 transition-colors" placeholder="Your name" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-white/80 text-sm uppercase tracking-wider" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>Email</label>
+                                        <input type="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-amber-400/50 transition-colors" placeholder="your@email.com" />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-white/80 text-sm uppercase tracking-wider" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>Event Type</label>
+                                    <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400/50 transition-colors">
+                                        <option value="" className="bg-purple-900">Select Event Type</option>
+                                        <option value="wedding" className="bg-purple-900">Wedding</option>
+                                        <option value="corporate" className="bg-purple-900">Corporate</option>
+                                        <option value="social" className="bg-purple-900">Social</option>
+                                        <option value="other" className="bg-purple-900">Other</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-white/80 text-sm uppercase tracking-wider" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>Message</label>
+                                    <textarea rows="4" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-amber-400/50 transition-colors" placeholder="Tell us about your vision..."></textarea>
+                                </div>
+                                <button type="submit" className="w-full py-4 bg-amber-400 text-purple-900 rounded-xl font-semibold text-lg hover:bg-amber-300 transition-all duration-300 transform hover:scale-[1.02]" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                                    Send Message
+                                </button>
+                            </form>
+
+                            <div className="mt-12 pt-8 border-t border-white/10 grid md:grid-cols-3 gap-8 text-center">
+                                <div className="flex flex-col items-center gap-2 text-white/70">
+                                    <MapPin />
+                                    <span className="text-sm" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>123 Elegance Ave, Suite 500<br/>New York, NY 10001</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-2 text-white/70">
+                                    <Phone />
+                                    <span className="text-sm" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>+1 (555) 123-4567</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-2 text-white/70">
+                                    <Mail />
+                                    <span className="text-sm" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>hello@eventsbyevara.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Footer
+        const Footer = () => {
+            return (
+                <footer className="bg-purple-950/50 border-t border-white/5 py-12 px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                        <div className="flex items-center">
+                            <span className="text-3xl text-white italic font-serif">Evara</span>
+                            <span className="ml-2 text-amber-400 text-xs uppercase tracking-[0.2em]">Events</span>
+                        </div>
+                        <div className="flex gap-8 text-white/60 text-sm" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                            <a href="#" className="hover:text-amber-400 transition-colors">Privacy</a>
+                            <a href="#" className="hover:text-amber-400 transition-colors">Terms</a>
+                            <a href="#" className="hover:text-amber-400 transition-colors">Instagram</a>
+                        </div>
+                        <div className="text-white/40 text-sm" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>
+                            © 2024 Events By Evara. All rights reserved.
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        // Main App
+        const App = () => {
+            useEffect(() => {
+                lucide.createIcons();
+            }, []);
+
+            return (
+                <div className="min-h-screen bg-[#0f0518]">
+                    <Navigation />
+                    <Hero />
+                    <EventTypes />
+                    <Services />
+                    <Gallery />
+                    <Testimonials />
+                    <Contact />
+                    <Footer />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
+```
+

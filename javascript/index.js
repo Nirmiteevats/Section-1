@@ -7,5 +7,9 @@ myname="nimi";
 console.log(myname);
 console.log(typeof(myname));
 
+empty=null;
+console.log(empty);
+
+
 isHungry=false;
 console.log(typeof(isHungry));
