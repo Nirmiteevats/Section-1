@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Events By Evara | Premium Event Experiences</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@700;800&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#b7b5b4",
+                    "primary": "#fff6df",
+                    "secondary-container": "#474746",
+                    "surface-bright": "#38393a",
+                    "tertiary": "#f8f6f5",
+                    "on-surface": "#e2e2e2",
+                    "on-primary": "#3a3000",
+                    "surface": "#121414",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "surface-dim": "#121414",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "surface-container-high": "#282a2b",
+                    "on-secondary": "#313030",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-primary-fixed": "#221b00",
+                    "tertiary-container": "#dcd9d9",
+                    "inverse-on-surface": "#2f3131",
+                    "on-primary-fixed-variant": "#544600",
+                    "on-primary-container": "#705e00",
+                    "on-tertiary": "#303030",
+                    "on-surface-variant": "#d0c6ab",
+                    "inverse-surface": "#e2e2e2",
+                    "surface-tint": "#e9c400",
+                    "tertiary-fixed": "#e4e2e1",
+                    "surface-variant": "#333535",
+                    "outline-variant": "#4d4732",
+                    "outline": "#999077",
+                    "surface-container": "#1e2020",
+                    "secondary": "#c8c6c5",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "background": "#121414",
+                    "primary-fixed": "#ffe16d",
+                    "surface-container-highest": "#333535",
+                    "surface-container-low": "#1a1c1c",
+                    "secondary-fixed": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#474746",
+                    "primary-container": "#ffd700",
+                    "surface-container-lowest": "#0c0f0f",
+                    "primary-fixed-dim": "#e9c400",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "inverse-primary": "#705d00",
+                    "on-tertiary-container": "#5f5f5f",
+                    "on-background": "#e2e2e2",
+                    "error": "#ffb4ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "margin-desktop": "48px",
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Anybody"],
+                    "label-sm": ["JetBrains Mono"],
+                    "body-base": ["Hanken Grotesk"],
+                    "title-md": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Anybody"],
+                    "display-lg": ["Anybody"]
+            },
+            "fontSize": {
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-base": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "title-md": ["20px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #121414;
+            color: #e2e2e2;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glow-hover:hover {
+            box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.2);
+        }
+        .tonal-card {
+            background-color: #1a1c1c;
+            border: 1px solid #333535;
+            transition: all 0.3s ease;
+        }
+        .tonal-card:hover {
+            background-color: #282a2b;
+            border-color: #ffd700;
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #ffd700 0%, #ffe16d 100%);
+        }
+        .mask-image-radial {
+            mask-image: radial-gradient(circle, black 0%, transparent 80%);
+        }
+    </style>
+</head>
+<body class="font-body-base text-body-base">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface-dim/95 backdrop-blur-md border-b border-outline-variant">
+<div class="font-headline-lg text-headline-lg text-primary uppercase tracking-tighter">Events By Evara</div>
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-title-md text-title-md" href="#">Events</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-title-md text-title-md" href="#">Services</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-title-md text-title-md" href="#">Gallery</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-title-md text-title-md" href="#">Testimonials</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-title-md text-title-md" href="#">Contact</a>
+</div>
+<button class="bg-primary-container text-on-primary-fixed font-bold px-6 py-2 rounded-lg hover:scale-105 active:scale-95 transition-all">
+            Book Now
+        </button>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden pt-20">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center brightness-[0.3]" data-alt="A grand event hall filled with dramatic warm lighting, high-contrast shadows, and golden decorative elements. The scene is sophisticated and high-energy, with sleek black furniture and charcoal walls that make the golden yellow light fixtures and centerpieces pop. The atmosphere is premium and exclusive, shot with a professional architectural lens." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJ55VobPE3wXhMeBskZrK75HW9QvmyIZC_5ON6qPFb_kjmMGI1GMU0w5Esv2VGfTYDfyWjucN5IcO0jBjmXQz1iSXttCNRrsm5dUvwHwKK38VxlecSjxxWC54m0OsCjvk3fX_NLCi3extAwzSPyQv1naO1IV8fV1XxQpXxRO-XxBsT3Ojm75OAjsl5Le4d8W7tAxNtUSJxuX6q-yLc2LVc_x6m9h72GhIVk9TpGdKoWiXjHpXITCxlGNmXY8VhyQNAtgsaIOaORw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 text-center px-margin-mobile max-w-5xl">
+<span class="font-label-sm text-label-sm uppercase text-primary-container mb-4 block tracking-[0.2em]">Curating Extraordinary Moments</span>
+<h1 class="font-display-lg text-display-lg text-primary mb-6 leading-tight">THE ART OF <span class="text-primary-container">UNFORGETTABLE</span> EVENTS</h1>
+<p class="font-title-md text-title-md text-on-surface-variant mb-10 max-w-2xl mx-auto">
+                Transforming visions into high-energy realities. We design immersive experiences that resonate and inspire.
+            </p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-primary-container text-on-primary-fixed px-10 py-4 font-bold rounded-lg glow-hover transition-all flex items-center justify-center gap-2">
+                    Start Planning <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="border border-primary-container text-primary-container px-10 py-4 font-bold rounded-lg hover:bg-primary-container/10 transition-all">
+                    View Gallery
+                </button>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase vertical-text">Scroll</span>
+<span class="material-symbols-outlined text-primary-container">expand_more</span>
+</div>
+</section>
+<!-- Types of Event Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface">
+<div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<span class="font-label-sm text-label-sm text-primary-container uppercase">Expertise</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mt-2">What We Create</h2>
+</div>
+<p class="text-on-surface-variant max-w-md">From intimate galas to stadium-filling concerts, we handle the complexity so you can enjoy the moment.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Event Card 1 -->
+<div class="group relative aspect-[4/5] overflow-hidden rounded-xl cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A luxury wedding reception with a dramatic black and gold theme. The long tables are adorned with golden candelabras and white orchids, set against a dark, moody background with subtle warm lighting. The image captures a sense of modern elegance and high-end celebration." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANhPbHdnqFQcQfORwl1o3e_fVRivxlluAr3iZghjeD60AiJadiuMbosod-K9Lk-g9CjnvResTFVSsxFsBX341dJJjEer0sGl_98AYY6ZAzZxX05n4TFMyCf-IUDA6cpNsJjEyqFNx2dYSDhAYvBQECMSKoqhaK6U8MhWN5rJQHwbnTdEGG2-CJO1S8jSXqi9md9ROY-pCucsChFvwbjWckCXgkbTAoTXHGuWLB_aqxOoEtS8dkRUpnimUvgedq1mVuiqxa2-YMNQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent group-hover:from-primary-container/40 transition-colors duration-500"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+<h3 class="font-headline-lg text-white mb-2">Weddings</h3>
+<p class="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-300">Timeless luxury for your most significant milestone.</p>
+<span class="material-symbols-outlined text-primary-container mt-4 block">arrow_right_alt</span>
+</div>
+<div class="absolute top-0 right-0 p-6">
+<div class="w-12 h-12 rounded-full bg-surface-dim/80 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">favorite</span>
+</div>
+</div>
+</div>
+<!-- Event Card 2 -->
+<div class="group relative aspect-[4/5] overflow-hidden rounded-xl cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A high-tech corporate innovation summit with a large blue LED screen showing global data. The audience is in silhouette, facing a brightly lit stage where a professional speaker stands. The vibe is sleek, corporate, and forward-thinking, emphasizing clarity and impact." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC8XOt2C0KeUCpXZYaDlC-86fZfgT_ep20-aN-a0mgcVbOh_3lsTrZ0WQqMqHgWEw4_Y_hKN_5cvc18NLWXAgucEYBW9QmvSyV6iLmUZrgs-8lsae_GEN46uuIZK49k5I7d-REJ0WGv-uG5SrcAowtsLd1J612Czii2j5nha0kxAlMmGCEm_24DrHR9xCD2Uim92UQxBmfB1e8eP9UJSePio6LfPKI9M0SbWusCwcDEkN8PXz97OdbU16kTXT8EaRFhOPcN1kSDGw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent group-hover:from-primary-container/40 transition-colors duration-500"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+<h3 class="font-headline-lg text-white mb-2">Corporate</h3>
+<p class="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-300">High-stakes summits and gala dinners that command attention.</p>
+<span class="material-symbols-outlined text-primary-container mt-4 block">arrow_right_alt</span>
+</div>
+<div class="absolute top-0 right-0 p-6">
+<div class="w-12 h-12 rounded-full bg-surface-dim/80 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">business_center</span>
+</div>
+</div>
+</div>
+<!-- Event Card 3 -->
+<div class="group relative aspect-[4/5] overflow-hidden rounded-xl cursor-pointer border-t-2 border-primary-container">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="An massive outdoor music concert at sunset with intense stage lighting, fireworks, and a huge crowd. The sky is dark and moody, contrasting with the brilliant golden sparks and spotlights. The atmosphere is electric and high-energy." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIWxio89rHfcxtnfycFx2d1v2borTCV0ZyzwkPX4DfsyHn3R41YfvYz0KkTh4sVjsRi72wsHMtnlwqoEVH2uH-eRAskiuEcjxIYAZbfNFZsTNiEFXqtxjmS8t5V6og5X8MejtZVUQgw-kKeJNQrYcKCLKHpz6T0bkZboomhCwVIMA7X75hMfbR2wjQ_mwYvRg9tlk-dQ7AQUh5JA4FrFz_2Hy6zJbRbpghJ3xTC5HqDl0q_3q6e0vRdl72yOg_mza67b-m3D1DPw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent group-hover:from-primary-container/40 transition-colors duration-500"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+<h3 class="font-headline-lg text-white mb-2">Concerts</h3>
+<p class="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-300">World-class production for electric live performances.</p>
+<span class="material-symbols-outlined text-primary-container mt-4 block">arrow_right_alt</span>
+</div>
+<div class="absolute top-0 right-0 p-6">
+<div class="w-12 h-12 rounded-full bg-surface-dim/80 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">music_note</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low">
+<div class="text-center mb-16">
+<span class="font-label-sm text-label-sm text-primary-container uppercase">Full-Service</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mt-2">Precision In Every Detail</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Service 1 -->
+<div class="tonal-card p-8 rounded-lg">
+<div class="mb-6 text-primary-container">
+<span class="material-symbols-outlined text-4xl">architecture</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary mb-4">Venue Design</h3>
+<p class="text-on-surface-variant text-sm">Custom layout optimization and spatial planning to maximize impact and guest flow.</p>
+</div>
+<!-- Service 2 -->
+<div class="tonal-card p-8 rounded-lg border-t-2 border-primary-container">
+<div class="mb-6 text-primary-container">
+<span class="material-symbols-outlined text-4xl">lightbulb</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary mb-4">Production</h3>
+<p class="text-on-surface-variant text-sm">State-of-the-art lighting, audio, and visual solutions tailored for high-energy results.</p>
+</div>
+<!-- Service 3 -->
+<div class="tonal-card p-8 rounded-lg">
+<div class="mb-6 text-primary-container">
+<span class="material-symbols-outlined text-4xl">manage_accounts</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary mb-4">Management</h3>
+<p class="text-on-surface-variant text-sm">Full-scale logistics and vendor coordination, ensuring every moving part fits perfectly.</p>
+</div>
+<!-- Service 4 -->
+<div class="tonal-card p-8 rounded-lg">
+<div class="mb-6 text-primary-container">
+<span class="material-symbols-outlined text-4xl">restaurant</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary mb-4">Experiences</h3>
+<p class="text-on-surface-variant text-sm">Curating bespoke catering, entertainment, and interactive moments for your guests.</p>
+</div>
+</div>
+</section>
+<!-- Gallery Section (Bento Grid) -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface">
+<div class="mb-16">
+<h2 class="font-headline-lg text-headline-lg text-primary">The Evara Gallery</h2>
+<div class="h-1 w-24 bg-primary-container mt-4"></div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 h-[600px] md:h-[800px]">
+<div class="col-span-2 row-span-2 relative rounded-xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A stunning 40th birthday party with an elaborate black and gold balloon arch and a champagne tower centerpiece. Guests in formal black attire are celebrating in a sophisticated dark venue illuminated by soft golden glows. High-contrast, premium aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSjR5vqTMPIqkTbxQcIRnLpCPOYAecR8Gg0qrE8oLFWGW7LVIz6zHxJhVyPVkKPI5ocebGrgNp5LSauTTHDFgkrPFL34aTpv0x4l4iZKT79ue621OxQp2CVmaWozTB0OoxlEifCjDb2SJUT8EfCz3iYAm7ZR0Krkn0YYKPirntvl9VeraCprhjQxllC5xIp7fs319JtOyGpfIaPFYfJjPXdBLCNY1_6m8rMAMQc_CEMZpS4yqBSOaWw7q6YRnni-kqP0s9119Jlw')"></div>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors"></div>
+</div>
+<div class="relative rounded-xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A close-up of a high-end dinner setting with black plates, golden cutlery, and a custom menu card. The lighting is focused and dramatic, highlighting the luxury textures and materials used in the table design." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvsszxNcx8aV9Nsny9IXxqAcHIV9O4d7N8GQ5TYH8GvPURxHeYcBY1eqYzZc-9LpbGzXq3m_5E2rQFf-TNwIdjBEcky2XhR4-ma_r6QyBHPxcKJCHbxI8MK6_FGejhOb0IvfGmgG1wdV0LFH9v8qcKcBF7OCm_LYFbFg-5omicYEC7t_XwjuLSwwshCqRi7yKqCiOCUr2wzk8ucBrzrTiA715JJKvEhI7clJVLoN0WeyQ-9p4LcHkUEbhy6UNqdXENRZpIoao_yA')"></div>
+</div>
+<div class="relative rounded-xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A view of a tech conference stage from the back of the room. A large digital screen displays vibrant purple and blue abstract shapes, reflecting off the polished dark floors. Professional and atmospheric." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBnTQ-nXNrfBm4nE8GK_j_grUs6dLEbDrfL59ey7Am8pulW-o20x1GThGBjK56Dwi5VxsLPSJl_vv7ZX4nG98X33HFqf1v0fcAi-H5cGFaim871Rq5IcWevnCfU2HfkVxdNigIr2a8m4yr0YfCRBzmdt55zQGBF985ab0wuoY_UZms104AhzW648E-mmHq5G8OsgIYBRij0vPpTrqt5Xj6GNBCgunLdQpwmaq3o8t01jYFGU8tlzj9kA4Fybkffl0VP2cZrC6MSiw')"></div>
+</div>
+<div class="col-span-2 relative rounded-xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A wide shot of a wedding ceremony aisle at night, lined with dozens of tall glass cylinders holding white candles. The contrast between the dark black carpet and the flickering golden candle light creates a magical, intimate atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhjslzLZUu6VeCbGMNH2-QZBzKLiUp10JlycJ7gcpBe6JF3cO86Gcoi58QepXUfvE5CsT1wlj2-OVm2r2Iqsc_NB3z1m9hqQeizyPTa5rTN9EmMeZ49J17AcVAr2RpuamW8NSQtPwe4jpNeXmuWfVrZN5c6gap4xwFacxL_OcNiC50KiuzGw7SwqQ3GgB4r6qAJtcJ_c4Ps9BFRJLDuhXOWL3TKBgOdO8t7VT2EMmviuvYyAuRdzJmGHN208kK3L4GW8j50Qgwpw')"></div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest overflow-hidden relative">
+<div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[120px]"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<span class="font-label-sm text-label-sm text-primary-container uppercase">Feedback</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mt-2">What Our Clients Say</h2>
+<div class="mt-12 space-y-8">
+<div class="bg-surface-container p-8 rounded-xl border-l-4 border-primary-container">
+<p class="font-title-md text-on-surface mb-6 italic">"Evara didn't just plan an event; they created an atmosphere. Our product launch was the talk of the industry for months."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container"></div>
+<div>
+<p class="font-bold text-primary">Marcus Thorne</p>
+<p class="text-xs text-on-surface-variant font-label-sm uppercase">CEO, Nexus Dynamics</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-gutter">
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant">
+<div class="flex text-primary-container mb-4">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-sm text-on-surface-variant">"The attention to detail in the lighting design was phenomenal. Truly world-class."</p>
+</div>
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant">
+<p class="text-sm text-on-surface-variant">"They handled a crowd of 5,000 with absolute precision. Stress-free and high-impact."</p>
+</div>
+</div>
+<div class="space-y-gutter mt-8">
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant">
+<p class="text-sm text-on-surface-variant">"Our wedding was a dream. The golden theme was executed with such class and elegance."</p>
+</div>
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant">
+<p class="text-sm text-on-surface-variant">"Highly professional team. They understood our brand and amplified it through the event."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface relative overflow-hidden">
+<div class="max-w-6xl mx-auto flex flex-col lg:flex-row rounded-2xl overflow-hidden shadow-2xl border border-outline-variant">
+<div class="lg:w-1/2 p-12 bg-primary-container flex flex-col justify-center">
+<h2 class="font-headline-lg text-on-primary-fixed mb-6">Ready to make an impact?</h2>
+<p class="text-on-primary-fixed-variant font-title-md mb-8">Tell us about your event vision and we'll help you bring it to life with precision and style.</p>
+<div class="space-y-4">
+<div class="flex items-center gap-4 text-on-primary-fixed">
+<span class="material-symbols-outlined">call</span>
+<span>+1 (555) 890-EVARA</span>
+</div>
+<div class="flex items-center gap-4 text-on-primary-fixed">
+<span class="material-symbols-outlined">mail</span>
+<span>hello@eventsbyevara.com</span>
+</div>
+<div class="flex items-center gap-4 text-on-primary-fixed">
+<span class="material-symbols-outlined">location_on</span>
+<span>London • Dubai • New York</span>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 p-12 bg-surface-container-highest">
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block font-label-sm text-label-sm text-primary-container mb-2 uppercase">Full Name</label>
+<input class="w-full bg-surface-dim border-outline-variant rounded-lg p-4 focus:ring-primary-container focus:border-primary-container text-primary" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-primary-container mb-2 uppercase">Email Address</label>
+<input class="w-full bg-surface-dim border-outline-variant rounded-lg p-4 focus:ring-primary-container focus:border-primary-container text-primary" type="email"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-primary-container mb-2 uppercase">Event Type</label>
+<select class="w-full bg-surface-dim border-outline-variant rounded-lg p-4 focus:ring-primary-container focus:border-primary-container text-primary">
+<option>Wedding</option>
+<option>Corporate Summit</option>
+<option>Concert / Performance</option>
+<option>Private Gala</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-primary-container mb-2 uppercase">Message</label>
+<textarea class="w-full bg-surface-dim border-outline-variant rounded-lg p-4 focus:ring-primary-container focus:border-primary-container text-primary" rows="4"></textarea>
+</div>
+<button class="w-full bg-primary-container text-on-primary-fixed font-bold py-4 rounded-lg hover:scale-[1.02] active:scale-95 transition-all" type="submit">
+                        Request a Proposal
+                    </button>
+</form>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest border-t border-outline-variant">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-headline-lg text-headline-lg text-primary">Events By Evara</div>
+<p class="text-on-surface-variant font-body-base text-body-base max-w-xs text-center md:text-left">Redefining event production through high-contrast design and precision planning.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 font-body-base text-body-base">
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">FAQ</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Careers</a>
+</div>
+<div class="flex items-center gap-6">
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary-container hover:bg-primary-container hover:text-on-primary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary-container hover:bg-primary-container hover:text-on-primary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary-container hover:bg-primary-container hover:text-on-primary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+</a>
+</div>
+<div class="w-full md:w-auto text-center md:text-right mt-8 md:mt-0 text-on-surface-variant/60 text-sm">
+            © 2024 Events By Evara. All rights reserved.
+        </div>
+</footer>
+<script>
+        // Simple scroll animation for reveal
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.tonal-card, h2, .group').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+</body></html>
