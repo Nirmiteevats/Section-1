@@ -83,4 +83,3 @@ const cheapPhones = phonelist.filter((phone) => {
 });
 
 console.log(cheapPhones);
-
