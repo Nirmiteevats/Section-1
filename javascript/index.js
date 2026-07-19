@@ -9,7 +9,7 @@ console.log(typeof(myname));
 
 empty=null;
 console.log(empty);
-
+console.log(typeof(empty));
 
 isHungry=false;
 console.log(typeof(isHungry));

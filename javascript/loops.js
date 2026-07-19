@@ -38,7 +38,7 @@ for (let i = 10; i <= 35; i++) {
 
 // new new new new new
 // program 2
-//wap to print all odd numbers in range of 10-60
+// wap to print all odd numbers in range of 10-60
 for (let i = 10; i <= 60; i++) {
     if (i % 2 !== 0) {
         console.log(i);
@@ -65,7 +65,7 @@ do {
 // print first 10 fibonacci nos
 a2=0
 b2=1
-for(let i=0;i<=10;i++){
+for(let i=0;i<10;i++){
     console.log(a2);
     c2=a2+b2;
     a2=b2;
